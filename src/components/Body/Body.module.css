@@ -1,6 +1,5 @@
 .body {
     background-color: #E8E8E8;
-    min-height: 100px;
     width: 100%;
-    border: 1px solid green;
+    height: 100vh;
 }
