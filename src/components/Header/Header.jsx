@@ -6,12 +6,10 @@ import Logo from './components/Logo';
 function Header() {
 	return (
 		<div className={classes.header}>
-			<div className={classes['header-title']}>
-				<span className={classes['header-logo']}>
-					<Logo />
-				</span>
-				<span>COURSES</span>
+			<div className={classes['header-logo']}>
+				<Logo />
 			</div>
+			<div className={classes['header-title']}>COURSES</div>
 			<div className={classes['header-button']}>
 				<span>Sergey</span>
 				<Button label='Logout' />
