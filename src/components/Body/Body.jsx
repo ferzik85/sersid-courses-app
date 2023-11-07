@@ -14,9 +14,10 @@ function Body() {
 
 	return (
 		<div className={bodyClasses.body}>
-			<Courses courses={courses} />
+			{/* <Courses courses={courses} />
 			<EmptyCourseList />
-			<CourseInfo course={courses[0]} />
+			<CourseInfo course={courses[0]} /> */}
+			asdddddd
 		</div>
 	);
 }
