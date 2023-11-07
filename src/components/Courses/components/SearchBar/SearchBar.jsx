@@ -1,14 +1,13 @@
 import React from 'react';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
+import classes from './SearchBar.module.css';
 
 function SearchBar() {
 	return (
-		<div>
-			<p>
-				<Input />
-				<Button label='Search' />
-			</p>
+		<div className={classes['search-bar']}>
+			<Input />
+			<Button label='Search' />
 		</div>
 	);
 }

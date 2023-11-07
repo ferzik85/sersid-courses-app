@@ -5,3 +5,16 @@
     width: 80%;
     margin: auto;
 }
+
+.courses-header {
+    width: 700px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.courses-header button {
+    margin-left: auto;
+}

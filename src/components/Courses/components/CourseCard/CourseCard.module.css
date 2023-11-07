@@ -41,3 +41,10 @@
     margin-top: auto;
     margin-bottom: 10px;
 }
+
+.course-card-right p {
+    width: 250px; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+}

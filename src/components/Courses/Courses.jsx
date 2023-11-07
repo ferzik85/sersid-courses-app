@@ -7,10 +7,10 @@ import classes from './Courses.module.css';
 function Courses({ courses }) {
 	return (
 		<div className={classes.courses}>
-			{/* <SearchBar />
-			<p>
+			<div className={classes['courses-header']}>
+				<SearchBar />
 				<Button label='Add New Course' />
-			</p> */}
+			</div>
 			{courses.map((course) => (
 				<CourseCard
 					key={course.id}
@@ -19,7 +19,7 @@ function Courses({ courses }) {
 					description={course.description}
 					creationDate={course.creationDate}
 					duration={course.duration}
-					authors={courses.authors}
+					authors={course.authors}
 				/>
 			))}
 		</div>
