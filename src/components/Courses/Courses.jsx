@@ -2,14 +2,15 @@ import React from 'react';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
+import classes from './Courses.module.css';
 
 function Courses({ courses }) {
 	return (
-		<div>
-			<SearchBar />
+		<div className={classes.courses}>
+			{/* <SearchBar />
 			<p>
 				<Button label='Add New Course' />
-			</p>
+			</p> */}
 			{courses.map((course) => (
 				<CourseCard
 					key={course.id}
