@@ -1,0 +1,20 @@
+.empty-course-list {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-course-list div {
+    margin: auto;
+    margin-top: 20px;
+}
+
+.empty-course-list > div:first-of-type {
+    font-weight: bold;
+    margin-top: 300px;
+  }
+  

@@ -1,14 +1,15 @@
 import React from 'react';
 import Button from '../../common/Button/Button';
+import classes from './EmptyCourseList.module.css';
 
 function EmptyCourseList() {
 	return (
-		<div>
-			<p>Course List is Empty</p>
-			<p>Please use &quot;Add New Course&quot; button to add your first course</p>
-			<p>
+		<div className={classes[['empty-course-list']]}>
+			<div>Course List is Empty</div>
+			<div>Please use &quot;Add New Course&quot; button to add your first course</div>
+			<div>
 				<Button label='Add New Course' />
-			</p>
+			</div>
 		</div>
 	);
 }

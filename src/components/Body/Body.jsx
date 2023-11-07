@@ -14,9 +14,9 @@ function Body() {
 
 	return (
 		<div className={bodyClasses.body}>
-			<Courses courses={courses} />
-			{/* <EmptyCourseList />
-			<CourseInfo course={courses[0]} /> */}
+			{/* <Courses courses={courses} /> */}
+			<EmptyCourseList />
+			{/* <CourseInfo course={courses[0]} /> */}
 		</div>
 	);
 }
