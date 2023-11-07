@@ -1,13 +1,16 @@
+import React from 'react';
+import Button from '../../common/Button/Button';
 import classes from './Header.module.css';
 
 function Header() {
 	return (
-		<header className={classes.header}>
-			<div className={classes.logo}>
-				<span>Logo</span>
-				Courses
-			</div>
-		</header>
+		<div className={classes.header}>
+			<p className={classes.title}>Courses</p>
+			<span>Sergey</span>
+			<span className={classes.headerbutton}>
+				<Button label='Logout' />
+			</span>
+		</div>
 	);
 }
 
