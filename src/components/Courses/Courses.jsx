@@ -4,7 +4,7 @@ import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import classes from './Courses.module.css';
 
-function Courses({ courses }) {
+function Courses({ courses, selectCourseId }) {
 	return (
 		<div className={classes.courses}>
 			<div className={classes['courses-header']}>
@@ -20,6 +20,7 @@ function Courses({ courses }) {
 					creationDate={course.creationDate}
 					duration={course.duration}
 					authors={course.authors}
+					selectCourseId={selectCourseId}
 				/>
 			))}
 		</div>

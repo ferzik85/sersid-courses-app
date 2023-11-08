@@ -5,7 +5,7 @@ import formatDuration from '../../../../utils/FormatDuration';
 import formatAuthors from '../../../../utils/FormatAuthors';
 import classes from './CourseCard.module.css';
 
-function CourseCard({ title, description, creationDate, duration, authors }) {
+function CourseCard({ id, title, description, creationDate, duration, authors, selectCourseId }) {
 	return (
 		<div className={classes['course-card']}>
 			<div className={classes['course-card-left']}>
@@ -26,7 +26,7 @@ function CourseCard({ title, description, creationDate, duration, authors }) {
 					{formatDate(creationDate)}
 				</p>
 				<p className={classes['course-card-right-p-button']}>
-					<Button label='SHOW COURSE' />
+					<Button label='SHOW COURSE' onClick={() => selectCourseId(id)} />
 				</p>
 			</div>
 			<div />

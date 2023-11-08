@@ -5,7 +5,7 @@ import formatDuration from '../../utils/FormatDuration';
 import formatAuthors from '../../utils/FormatAuthors';
 import classes from './CourseInfo.module.css';
 
-function CourseInfo({ course }) {
+function CourseInfo({ course, resetCourseId }) {
 	return (
 		<div className={classes['course-info']}>
 			<div className={classes['course-info-title']}>{course.title}</div>
@@ -34,7 +34,7 @@ function CourseInfo({ course }) {
 				</div>
 			</div>
 			<div>
-				<Button label='BACK' />
+				<Button label='BACK' onClick={resetCourseId} />
 			</div>
 		</div>
 	);
