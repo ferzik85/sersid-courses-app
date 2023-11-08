@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  width: 700px;
+  width: 80%;
   margin: auto;
 }
 .course-info > div:last-of-type {
@@ -30,6 +30,11 @@
   font-weight: bold;
 }
 
+tr > td:first-of-type {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 .course-description-layout {
   display: flex;
   flex-wrap: nowrap;
@@ -40,13 +45,18 @@
   text-align: justify;
   border-right: 1px solid #e8e8e8;
   padding-right: 20px;
-  width: 60%;
+  width: 50%;
 }
 
-p {
-  margin: 10px;
+.course-description-metadata {
+  padding-left: 20px;
 }
 
-p span {
-  font-weight: bold;
+tr td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+tr td:last-of-type {
+  padding-left: 20px;
 }
