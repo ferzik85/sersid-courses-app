@@ -7,7 +7,7 @@ import classes from './CourseInfo.module.css';
 
 function CourseInfo({ course, resetCourseId }) {
 	const formatDurationInHours = (duration) => {
-		const formattedDuration = formatDuration(duration)?.split(' ');
+		const formattedDuration = formatDuration(duration).split(' ');
 		const formattedTime = formattedDuration[0];
 		const formattedText = formattedDuration[1];
 		return (

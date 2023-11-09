@@ -14,16 +14,9 @@ function Body() {
 
 	const [courseId, setCourseId] = useState(null);
 
-	const selectCourseId = useCallback(
-		(id) => {
-			setCourseId(id);
-		},
-		[setCourseId]
-	);
+	const selectCourseId = useCallback((id) => setCourseId(id), [setCourseId]);
 
-	const resetCourseId = useCallback(() => {
-		setCourseId(null);
-	}, [setCourseId]);
+	const resetCourseId = useCallback(() => setCourseId(null), [setCourseId]);
 
 	const isCourseSelected = () => courseId !== null;
 
