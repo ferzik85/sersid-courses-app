@@ -8,12 +8,7 @@ import classes from './Courses.module.css';
 function Courses({ courses, selectCourseId }) {
 	const [courseList, setCourses] = useState(courses);
 
-	const submitSearchString = useCallback(
-		(searchString) => {
-			setCourses(searchCourses(searchString, courseList));
-		},
-		[setCourses]
-	);
+	const submitSearchString = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
 
 	return (
 		<div className={classes.courses}>
