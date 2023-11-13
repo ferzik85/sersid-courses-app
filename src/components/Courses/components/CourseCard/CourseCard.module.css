@@ -5,7 +5,9 @@
   background-color: white;
   border-radius: 4px;
   margin: auto;
-  margin-top: 10px;
+}
+
+.card:not(:last-child) {
   margin-bottom: 10px;
 }
 
@@ -26,8 +28,7 @@
 
 .cardRight {
   margin-top: 40px;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 .cardRight p {
@@ -42,6 +43,8 @@
 }
 
 .cardButton {
-  margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   margin-bottom: 10px;
 }
