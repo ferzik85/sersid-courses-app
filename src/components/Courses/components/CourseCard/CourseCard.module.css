@@ -1,7 +1,6 @@
-.course-card {
+.card {
   width: 700px;
   display: flex;
-  flex-wrap: nowrap;
   border-left: 5px solid;
   background-color: white;
   border-radius: 4px;
@@ -10,38 +9,37 @@
   margin-bottom: 10px;
 }
 
-.course-card-left {
+.left {
   width: 70%;
   margin-right: 30px;
 }
 
-.course-card-title {
+.title {
   font-weight: bold;
   margin: 10px;
 }
 
-.course-card-description {
+.description {
   margin: 10px;
   text-align: justify;
 }
 
-.course-card-right {
+.right {
   margin-top: 40px;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
 }
 
-.course-card-right p span {
+.right p span {
   font-weight: bold;
 }
 
-.course-card-right-p-button {
+.card-button {
   margin-top: auto;
   margin-bottom: 10px;
 }
 
-.course-card-right p {
+.right p {
   width: 250px;
   white-space: nowrap;
   text-overflow: ellipsis;

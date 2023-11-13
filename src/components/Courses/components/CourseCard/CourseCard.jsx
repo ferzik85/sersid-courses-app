@@ -3,16 +3,16 @@ import Button from '../../../../common/Button/Button';
 import formatDate from '../../../../utils/FormatDate';
 import formatDuration from '../../../../utils/FormatDuration';
 import formatAuthors from '../../../../utils/FormatAuthors';
-import classes from './CourseCard.module.css';
+import styles from './CourseCard.module.css';
 
-function CourseCard({ id, title, description, creationDate, duration, authors, selectCourseId }) {
+function CourseCard({ id, title, description, creationDate, duration, authors, onShowCourseClick }) {
 	return (
-		<div className={classes['course-card']}>
-			<div className={classes['course-card-left']}>
-				<p className={classes['course-card-title']}>{title}</p>
-				<p className={classes['course-card-description']}>{description}</p>
+		<div className={styles.card}>
+			<div className={styles.left}>
+				<p className={styles.title}>{title}</p>
+				<p className={styles.description}>{description}</p>
 			</div>
-			<div className={classes['course-card-right']}>
+			<div className={styles.right}>
 				<p>
 					<span>Authors: </span>
 					{formatAuthors(authors)}
@@ -25,8 +25,8 @@ function CourseCard({ id, title, description, creationDate, duration, authors, s
 					<span>Created: </span>
 					{formatDate(creationDate)}
 				</p>
-				<p className={classes['course-card-right-p-button']}>
-					<Button label='SHOW COURSE' onClick={() => selectCourseId(id)} />
+				<p className={styles['card-button']}>
+					<Button label='SHOW COURSE' onClick={() => onShowCourseClick(id)} />
 				</p>
 			</div>
 			<div />

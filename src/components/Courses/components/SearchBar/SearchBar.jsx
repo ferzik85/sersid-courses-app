@@ -1,23 +1,23 @@
 import React, { useState, useCallback } from 'react';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
-import classes from './SearchBar.module.css';
+import styles from './SearchBar.module.css';
 
-function SearchBar({ submitSearchString }) {
+function SearchBar({ onSearchClick }) {
 	const [searchValue, setSearchValue] = useState(null);
 
-	const handleSearchValueChange = useCallback(
+	const handleChange = useCallback(
 		(value) => {
 			setSearchValue(value);
-			if (!value) submitSearchString(null);
+			if (!value) onSearchClick(null);
 		},
 		[setSearchValue]
 	);
 
 	return (
-		<div className={classes['search-bar']}>
-			<Input onChange={handleSearchValueChange} />
-			<Button label='Search' onClick={() => submitSearchString(searchValue)} />
+		<div className={styles['search-bar']}>
+			<Input onChange={handleChange} />
+			<Button label='Search' onClick={() => onSearchClick(searchValue)} />
 		</div>
 	);
 }

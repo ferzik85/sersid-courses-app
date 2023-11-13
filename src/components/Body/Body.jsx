@@ -4,7 +4,7 @@ import mockedCoursesList from '../../data/CoursesList';
 import mockedAuthorsList from '../../data/AuthorsList';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import CourseInfo from '../CourseInfo/CourseInfo';
-import bodyClasses from './Body.module.css';
+import styles from './Body.module.css';
 
 function Body() {
 	const courses = mockedCoursesList.map((course) => ({
@@ -14,9 +14,9 @@ function Body() {
 
 	const [courseId, setCourseId] = useState(null);
 
-	const selectCourseId = useCallback((id) => setCourseId(id), [setCourseId]);
+	const handleShowCourse = useCallback((id) => setCourseId(id), [setCourseId]);
 
-	const resetCourseId = useCallback(() => setCourseId(null), [setCourseId]);
+	const handleShowCourses = useCallback(() => setCourseId(null), [setCourseId]);
 
 	const isCourseSelected = () => courseId !== null;
 
@@ -26,11 +26,11 @@ function Body() {
 
 	const courseListIsEmpty = () => courses.length === 0;
 
-	const renderCourses = () => (courseListIsEmpty() ? <EmptyCourseList /> : <Courses courses={courses} selectCourseId={selectCourseId} />);
+	const renderCourses = () => (courseListIsEmpty() ? <EmptyCourseList /> : <Courses courses={courses} onShowCourseClick={handleShowCourse} />);
 
 	return (
-		<div className={bodyClasses.body}>
-			{isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} resetCourseId={resetCourseId} /> : renderCourses()}
+		<div className={styles.body}>
+			{isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()}
 		</div>
 	);
 }

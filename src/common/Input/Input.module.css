@@ -1,4 +1,7 @@
 .input {
-  display: flex;
   margin-right: 10px;
+}
+
+div input{
+  height: 22px; 
 }

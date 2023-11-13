@@ -6,7 +6,7 @@
   margin: auto;
 }
 
-.courses-header {
+.header {
   width: 700px;
   display: flex;
   flex-wrap: nowrap;
@@ -15,6 +15,6 @@
   margin-bottom: 20px;
 }
 
-.courses-header button {
+.header button {
   margin-left: auto;
 }

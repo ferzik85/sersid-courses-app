@@ -3,17 +3,17 @@ import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
-import classes from './Courses.module.css';
+import styles from './Courses.module.css';
 
-function Courses({ courses, selectCourseId }) {
+function Courses({ courses, onShowCourseClick }) {
 	const [courseList, setCourses] = useState(courses);
 
-	const submitSearchString = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
+	const handleSearchClick = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
 
 	return (
-		<div className={classes.courses}>
-			<div className={classes['courses-header']}>
-				<SearchBar submitSearchString={submitSearchString} />
+		<div className={styles.courses}>
+			<div className={styles.header}>
+				<SearchBar onSearchClick={handleSearchClick} />
 				<Button label='Add New Course' />
 			</div>
 			{courseList.map((course) => (
@@ -25,7 +25,7 @@ function Courses({ courses, selectCourseId }) {
 					creationDate={course.creationDate}
 					duration={course.duration}
 					authors={course.authors}
-					selectCourseId={selectCourseId}
+					onShowCourseClick={onShowCourseClick}
 				/>
 			))}
 		</div>

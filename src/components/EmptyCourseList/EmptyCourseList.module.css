@@ -1,6 +1,5 @@
 .empty-course-list {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   width: 80%;
   margin: auto;
