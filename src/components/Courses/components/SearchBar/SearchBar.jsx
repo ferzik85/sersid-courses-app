@@ -16,7 +16,9 @@ function SearchBar({ onSearchClick }) {
 
 	return (
 		<div className={styles['search-bar']}>
-			<Input onChange={handleChange} />
+			<div className={styles.input}>
+				<Input onChange={handleChange} />
+			</div>
 			<Button label='Search' onClick={() => onSearchClick(searchValue)} />
 		</div>
 	);

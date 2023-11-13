@@ -1,4 +1,7 @@
 .search-bar {
   display: flex;
-  flex-wrap: nowrap;
+}
+
+.input {
+  margin-right: 10px;
 }
