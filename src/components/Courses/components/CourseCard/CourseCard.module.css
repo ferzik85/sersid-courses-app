@@ -9,11 +9,6 @@
   margin-bottom: 10px;
 }
 
-.left {
-  width: 70%;
-  margin-right: 30px;
-}
-
 .title {
   font-weight: bold;
   margin: 10px;
@@ -24,24 +19,29 @@
   text-align: justify;
 }
 
-.right {
+.cardLeft {
+  width: 70%;
+  margin-right: 30px;
+}
+
+.cardRight {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
 }
 
-.right p span {
-  font-weight: bold;
-}
-
-.card-button {
-  margin-top: auto;
-  margin-bottom: 10px;
-}
-
-.right p {
+.cardRight p {
   width: 250px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.cardRight p span {
+  font-weight: bold;
+}
+
+.cardButton {
+  margin-top: auto;
+  margin-bottom: 10px;
 }

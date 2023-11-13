@@ -1,17 +1,16 @@
-.course-info {
+.courseInfo {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   width: 80%;
   margin: auto;
 }
-.course-info > div:last-of-type {
+.courseInfo > div:last-of-type {
   width: 100%;
   text-align: right;
   margin-top: 20px;
 }
 
-.course-info-title {
+.courseInfoTitle {
   font-weight: bold;
   font-size: 24px;
   width: 100%;
@@ -20,12 +19,12 @@
   margin-top: 30px;
 }
 
-.course-description {
+.courseDescription {
   background-color: white;
   padding: 20px;
 }
 
-.course-description > div:first-of-type {
+.courseDescription > div:first-of-type {
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -35,20 +34,19 @@ tr > td:first-of-type {
   font-weight: bold;
 }
 
-.course-description-layout {
+.courseDescriptionLayout {
   display: flex;
-  flex-wrap: nowrap;
   margin: auto;
 }
 
-.course-description-text {
+.courseDescriptionText {
   text-align: justify;
   border-right: 1px solid #e8e8e8;
   padding-right: 20px;
   width: 50%;
 }
 
-.course-description-metadata {
+.courseDescriptionMetadata {
   padding-left: 20px;
 }
 

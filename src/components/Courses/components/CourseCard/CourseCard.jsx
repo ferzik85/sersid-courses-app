@@ -8,11 +8,11 @@ import styles from './CourseCard.module.css';
 function CourseCard({ id, title, description, creationDate, duration, authors, onShowCourseClick }) {
 	return (
 		<div className={styles.card}>
-			<div className={styles.left}>
+			<div className={styles.cardLeft}>
 				<p className={styles.title}>{title}</p>
 				<p className={styles.description}>{description}</p>
 			</div>
-			<div className={styles.right}>
+			<div className={styles.cardRight}>
 				<p>
 					<span>Authors: </span>
 					{formatAuthors(authors)}
@@ -25,7 +25,7 @@ function CourseCard({ id, title, description, creationDate, duration, authors, o
 					<span>Created: </span>
 					{formatDate(creationDate)}
 				</p>
-				<p className={styles['card-button']}>
+				<p className={styles.cardButton}>
 					<Button label='SHOW COURSE' onClick={() => onShowCourseClick(id)} />
 				</p>
 			</div>

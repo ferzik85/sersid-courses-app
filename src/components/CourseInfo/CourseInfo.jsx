@@ -18,13 +18,13 @@ function CourseInfo({ course, onBackClick }) {
 	};
 
 	return (
-		<div className={styles['course-info']}>
-			<div className={styles['course-info-title']}>{course.title}</div>
-			<div className={styles['course-description']}>
+		<div className={styles.courseInfo}>
+			<div className={styles.courseInfoTitle}>{course.title}</div>
+			<div className={styles.courseDescription}>
 				<div>Description:</div>
-				<div className={styles['course-description-layout']}>
-					<div className={styles['course-description-text']}>{course.description}</div>
-					<div className={styles['course-description-metadata']}>
+				<div className={styles.courseDescriptionLayout}>
+					<div className={styles.courseDescriptionText}>{course.description}</div>
+					<div className={styles.courseDescriptionMetadata}>
 						<table>
 							<tbody>
 								<tr>

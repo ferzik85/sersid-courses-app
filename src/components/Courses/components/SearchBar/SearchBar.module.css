@@ -1,7 +1,7 @@
-.search-bar {
+.searchBar {
   display: flex;
 }
 
-.input {
+.searchInput {
   margin-right: 10px;
 }

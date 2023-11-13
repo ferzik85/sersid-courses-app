@@ -1,16 +1,16 @@
-.empty-course-list {
+.emptyList {
   display: flex;
   flex-direction: column;
   width: 80%;
   margin: auto;
 }
 
-.empty-course-list div {
+.emptyList div {
   margin: auto;
   margin-top: 20px;
 }
 
-.empty-course-list > div:first-of-type {
+.emptyList > div:first-of-type {
   font-weight: bold;
   margin-top: 300px;
 }
