@@ -1,0 +1,98 @@
+.create {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+  }
+  
+  .header {
+    margin: auto;
+    margin-top: 40px;
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    width: 1104px;
+  }
+  
+  .body {
+    width: 1104px;
+    height: 825px;
+    display: flex;
+    margin: auto;
+    background-color: white;
+    flex-direction: column;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .body p {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    width: 944px;
+    margin-top: 0;
+  }
+
+  .area {
+    height: 152px;
+    resize: none;
+  }
+
+  .duration {
+    width: 400px;
+  }
+
+  .durationHours {
+    margin-left: 15px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label input {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 48px !important;
+    padding-left: 15px;
+    font-size: 16px; 
+  }
+
+  label textarea {
+    font-size: 16px; 
+    padding-left: 15px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .errorBorder {
+    border-color:red;
+  }
+
+  .footer {
+    margin: auto;
+    margin-top: 20px;
+    width: 1104px;
+  }
+
+  .button {
+    height: 50px;
+    font-size: 16px; 
+    float: right;
+  }
+
+  .button:first-of-type {
+    margin-left: 15px;
+  }
+  
