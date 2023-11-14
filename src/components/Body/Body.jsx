@@ -4,6 +4,8 @@ import mockedCoursesList from '../../data/CoursesList';
 import mockedAuthorsList from '../../data/AuthorsList';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import CourseInfo from '../CourseInfo/CourseInfo';
+import Registration from '../Registration/Registration';
+import Login from '../Login/Login';
 import styles from './Body.module.css';
 
 function Body() {
@@ -30,7 +32,9 @@ function Body() {
 
 	return (
 		<div className={styles.body}>
-			{isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()}
+			{/* {isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()} */}
+			{/* <Login /> <Registration /> */}
+			<Registration />
 		</div>
 	);
 }
