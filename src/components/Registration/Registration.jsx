@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 import Button from '../../common/Button/Button';
-import Input from '../../common/Input/Input';
+import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import validateInput from '../../utils/ValidateInput';
 import styles from './Registration.module.css';
 
-const formId = 'registrationForm';
-
 function Registration() {
+	const formId = 'registrationForm';
 	const [name, setName] = useState(null);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [nameIsInvalid, setNameIsInvalid] = useState(false);
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
-
-	const handleNameChange = (value) => {
-		setName(value);
-		setNameIsInvalid(false);
-	};
-
-	const handleEmailChange = (value) => {
-		setEmail(value);
-		setEmailIsInvalid(false);
-	};
-
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		setPasswordIsInvalid(false);
-	};
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -37,31 +21,15 @@ function Registration() {
 	}
 
 	return (
-		<div className={styles.registration}>
-			<div className={styles.header}>
-				<b>Registration</b>
-			</div>
-			<div className={styles.body}>
-				<form onSubmit={handleSubmit} id={formId}>
-					<label>
-						<b>Name</b>
-						<Input onChange={handleNameChange} className={nameIsInvalid ? styles.errorBorder : null} />
-						{nameIsInvalid && <p className={styles.error}>Name is required.</p>}
-					</label>
-					<label>
-						<b>Email</b>
-						<Input onChange={handleEmailChange} className={passwordIsInvalid ? styles.errorBorder : null} />
-						{emailIsInvalid && <p className={styles.error}>Email is required.</p>}
-					</label>
-					<label>
-						<b>Password</b>
-						<Input onChange={handlePasswordChange} className={passwordIsInvalid ? styles.errorBorder : null} />
-						{passwordIsInvalid && <p className={styles.error}>Password is required.</p>}
-					</label>
+		<div className={styles.reg}>
+			<b className={styles.regHeader}>Registration</b>
+			<div className={styles.regBody}>
+				<form onSubmit={handleSubmit} id={formId} className={styles.regForm}>
+					<LabeledInput name='Name' isInvalid={nameIsInvalid} setValue={setName} />
+					<LabeledInput name='Email' isInvalid={emailIsInvalid} setValue={setEmail} />
+					<LabeledInput name='Password' isInvalid={passwordIsInvalid} setValue={setPassword} />
 				</form>
-				<div className={styles.regButton}>
-					<Button label='Register' isSubmit formName={formId} />
-				</div>
+				<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
 				<div className={styles.regHelp}>
 					If you have an account you may <b>Login</b>
 				</div>

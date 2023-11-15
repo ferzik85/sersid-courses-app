@@ -1,18 +1,18 @@
-.registration {
+.reg {
   display: flex;
   flex-direction: column;
   width: 80%;
   margin: auto;
 }
 
-.header {
+.regHeader {
   margin: auto;
   margin-top: 200px;
   font-size: 32px;
   margin-bottom: 30px;
 }
 
-.body {
+.regBody {
   width: 585px;
   height: 558px;
   display: flex;
@@ -24,51 +24,22 @@
   font-size: 16px;
 }
 
-form {
+.regForm {
   margin: auto;
   width: 286px;
   margin-bottom: 0;
-}
-
-label {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-label input {
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 48px !important;
-  padding-left: 15px;
-  font-size: 16px; 
-}
-
-label b {
-  display: block;
 }
 
 .regButton {
   margin: auto;
   margin-top: 0px;
   margin-bottom: 20px;
-}
-
-.regButton button {
-  height: 50px !important;
+  height: 50px;
   width: 282px;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .regHelp {
   margin: auto;
   margin-top: 0px;
-}
-
-.error {
-  color: red;
-}
-
-.errorBorder {
-  border-color:red;
 }

@@ -5,8 +5,8 @@ import mockedAuthorsList from '../../data/AuthorsList';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import CourseInfo from '../CourseInfo/CourseInfo';
 import Registration from '../Registration/Registration';
-import Login from '../Login/Login';
 import CreateCourse from '../CreateCourse/CreateCourse';
+import Login from '../Login/Login';
 import styles from './Body.module.css';
 
 function Body() {
@@ -34,7 +34,8 @@ function Body() {
 	return (
 		<div className={styles.body}>
 			{/* {isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()} */}
-			{/* <Login /> <Registration /> */}
+			{/* <CreateCourse /> <Login /><Registration /> */}
+
 			<CreateCourse />
 		</div>
 	);
