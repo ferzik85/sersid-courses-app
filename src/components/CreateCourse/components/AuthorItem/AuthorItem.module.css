@@ -1,0 +1,10 @@
+.authorItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.authorItemButton {
+    font-size: 18px;
+    margin-left: 10px;
+}

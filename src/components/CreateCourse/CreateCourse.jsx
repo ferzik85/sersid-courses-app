@@ -4,6 +4,7 @@ import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Duration from '../../common/Duration/Duration';
 import validateInput from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
+import AuthorItem from './components/AuthorItem/AuthorItem';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
@@ -14,6 +15,17 @@ function CreateCourse() {
 	const [titleIsInvalid, setTitleIsInvalid] = useState(false);
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
+
+	const fakeAuthors = [
+		{
+			id: '27cc3006-e93a-4748-8ca8-73d06aa93b6d',
+			name: 'Vasiliy Dobkin',
+		},
+		{
+			id: 'f762978b-61eb-4096-812b-ebde22838167',
+			name: 'Nicolas Kim',
+		},
+	];
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -55,6 +67,22 @@ function CreateCourse() {
 					<LabeledInput name='Duration' isInvalid={durationIsInvalid} onChange={handleDurationChange} inputClassName={styles.createDuration}>
 						<Duration duration={validateDuration(duration) ? duration : 0} className={styles.durationHours} />
 					</LabeledInput>
+					<div className={styles.createAuthorsPanel}>
+						<div className={styles.addAuthorsPanel}>
+							<p className={styles.createMain}>Authors</p>
+							<LabeledInput name='Author Name' isInvalid={durationIsInvalid} onChange={handleDurationChange} inputClassName={styles.createAuthor}>
+								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} />
+							</LabeledInput>
+							<p className={styles.createMain}>Authors List</p>
+							{fakeAuthors.map((author) => (
+								<AuthorItem key={author.id} id={author.id} name={author.name} />
+							))}
+						</div>
+						<div className={styles.courseAuthorsPanel}>
+							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
+							<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div className={styles.createFooter}>

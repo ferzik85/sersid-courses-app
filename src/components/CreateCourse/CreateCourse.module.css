@@ -50,11 +50,43 @@
   width: 944px;
 }
 
-.createDuration {
+.createDuration, .createAuthor {
   width: 400px;
 }
 
 .durationHours {
+  margin-left: 15px;
+}
+
+.createAuthorsPanel {
+  margin: auto;
+  display: flex;
+  width: 950px;
+}
+
+.addAuthorsPanel {
+  width: 650px;
+}
+
+.courseAuthorsPanel {
+  width: 320px
+}
+
+.courseAuthorsPanelTitle {
+  text-align: center;
+  margin: auto;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.courseAuthorsPanelEmptyList {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.createAuthorButton {
+  height: 50px;
+  font-size: 16px;
   margin-left: 15px;
 }
 

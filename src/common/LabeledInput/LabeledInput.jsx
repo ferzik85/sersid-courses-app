@@ -5,14 +5,14 @@ import TextArea from '../TextArea/TextArea';
 import styles from './LabeledInput.module.css';
 
 function LabeledInput({ name, onChange, isInvalid, children, inputClassName = null, isTextArea = false }) {
-	const assignInputClass = () =>
+	const assignInputClasses = () =>
 		isInvalid ? classnames(styles.labelInput, inputClassName, styles.errorBorder) : classnames(styles.labelInput, inputClassName);
 
 	return (
 		<label className={styles.label}>
 			{name}
 			<div>
-				{!isTextArea ? <Input onChange={onChange} className={assignInputClass()} /> : <TextArea onChange={onChange} className={assignInputClass()} />}
+				{!isTextArea ? <Input onChange={onChange} className={assignInputClasses()} /> : <TextArea onChange={onChange} className={assignInputClasses()} />}
 				{children}
 			</div>
 			{isInvalid && <p className={styles.error}>{name} is required.</p>}
