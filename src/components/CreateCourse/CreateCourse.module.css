@@ -34,6 +34,7 @@
 }
 
 .createForm {
+  margin: auto;
   width: 944px;
   margin-top: 0;
 }
@@ -41,9 +42,10 @@
 .createArea {
   height: 152px;
   resize: none;
+  padding-top: 10px;
 }
 
-.duration {
+.createDuration {
   width: 400px;
 }
 

@@ -32,8 +32,9 @@ function CreateCourse() {
 					<LabeledInput name='Title' isInvalid={titleIsInvalid} setValue={setTitle} />
 					<LabeledInput name='Description' isInvalid={descriptionIsInvalid} setValue={setDescription} inputClassName={styles.createArea} isTextArea />
 					<p className={styles.createMain}>Duration</p>
-					<LabeledInput name='Duration' isInvalid={durationIsInvalid} setValue={setDuration} />
-					<Duration duration={duration} className={styles.durationHours} />
+					<LabeledInput name='Duration' isInvalid={durationIsInvalid} setValue={setDuration} inputClassName={styles.createDuration}>
+						<Duration duration={duration} className={styles.durationHours} />
+					</LabeledInput>
 				</form>
 			</div>
 			<div className={styles.createFooter}>

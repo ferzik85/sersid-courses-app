@@ -7,11 +7,11 @@
 
 .labelInput {
   padding-top: 0;
-    padding-bottom: 0;
-    height: 48px !important;
-    padding-left: 15px;
-    font-size: 16px;
- }
+  padding-bottom: 0;
+  height: 48px;
+  padding-left: 15px;
+  font-size: 16px;
+}
 
 .error {
   color: red;
