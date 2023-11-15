@@ -13,6 +13,21 @@ function Registration() {
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 
+	const handleNameChange = (value) => {
+		setName(value);
+		setNameIsInvalid(false);
+	};
+
+	const handleEmailChange = (value) => {
+		setEmail(value);
+		setEmailIsInvalid(false);
+	};
+
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+		setPasswordIsInvalid(false);
+	};
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		setNameIsInvalid(!validateInput(name));
@@ -25,9 +40,9 @@ function Registration() {
 			<b className={styles.regHeader}>Registration</b>
 			<div className={styles.regBody}>
 				<form onSubmit={handleSubmit} id={formId} className={styles.regForm}>
-					<LabeledInput name='Name' isInvalid={nameIsInvalid} setValue={setName} />
-					<LabeledInput name='Email' isInvalid={emailIsInvalid} setValue={setEmail} />
-					<LabeledInput name='Password' isInvalid={passwordIsInvalid} setValue={setPassword} />
+					<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
 				</form>
 				<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
 				<div className={styles.regHelp}>

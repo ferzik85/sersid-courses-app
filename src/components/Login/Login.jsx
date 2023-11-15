@@ -11,6 +11,16 @@ function Login() {
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 
+	const handleEmailChange = (value) => {
+		setEmail(value);
+		setEmailIsInvalid(false);
+	};
+
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+		setPasswordIsInvalid(false);
+	};
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		setEmailIsInvalid(!validateInput(email));
@@ -22,8 +32,8 @@ function Login() {
 			<b className={styles.loginHeader}>Login</b>
 			<div className={styles.loginBody}>
 				<form onSubmit={handleSubmit} id={formId} className={styles.loginForm}>
-					<LabeledInput name='Email' isInvalid={emailIsInvalid} setValue={setEmail} />
-					<LabeledInput name='Password' isInvalid={passwordIsInvalid} setValue={setPassword} />
+					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
+					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
 				</form>
 				<Button label='LOGIN' isSubmit formName={formId} className={styles.loginButton} />
 				<div className={styles.loginHelp}>

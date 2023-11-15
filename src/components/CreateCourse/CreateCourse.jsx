@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classnames from 'classnames';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Duration from '../../common/Duration/Duration';
@@ -16,6 +15,21 @@ function CreateCourse() {
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
 
+	const handleTitleChange = (value) => {
+		setTitle(value);
+		setTitleIsInvalid(false);
+	};
+
+	const handleDescriptionChange = (value) => {
+		setDescription(value);
+		setDescriptionIsInvalid(false);
+	};
+
+	const handleDurationChange = (value) => {
+		setDuration(value);
+		setDurationIsInvalid(false);
+	};
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		setTitleIsInvalid(!validateInput(title));
@@ -29,11 +43,17 @@ function CreateCourse() {
 			<div className={styles.createBody}>
 				<form onSubmit={handleSubmit} id={formId} className={styles.createForm}>
 					<p className={styles.createMain}>Main Info</p>
-					<LabeledInput name='Title' isInvalid={titleIsInvalid} setValue={setTitle} />
-					<LabeledInput name='Description' isInvalid={descriptionIsInvalid} setValue={setDescription} inputClassName={styles.createArea} isTextArea />
+					<LabeledInput name='Title' isInvalid={titleIsInvalid} onChange={handleTitleChange} inputClassName={styles.createTitle} />
+					<LabeledInput
+						name='Description'
+						isInvalid={descriptionIsInvalid}
+						onChange={handleDescriptionChange}
+						inputClassName={styles.createDescription}
+						isTextArea
+					/>
 					<p className={styles.createMain}>Duration</p>
-					<LabeledInput name='Duration' isInvalid={durationIsInvalid} setValue={setDuration} inputClassName={styles.createDuration}>
-						<Duration duration={duration} className={styles.durationHours} />
+					<LabeledInput name='Duration' isInvalid={durationIsInvalid} onChange={handleDurationChange} inputClassName={styles.createDuration}>
+						<Duration duration={validateDuration(duration) ? duration : 0} className={styles.durationHours} />
 					</LabeledInput>
 				</form>
 			</div>

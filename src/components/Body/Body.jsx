@@ -35,7 +35,6 @@ function Body() {
 		<div className={styles.body}>
 			{/* {isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()} */}
 			{/* <CreateCourse /> <Login /><Registration /> */}
-
 			<CreateCourse />
 		</div>
 	);

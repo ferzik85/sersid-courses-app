@@ -39,10 +39,15 @@
   margin-top: 0;
 }
 
-.createArea {
+.createTitle {
+  width: 944px;
+}
+
+.createDescription {
   height: 152px;
   resize: none;
   padding-top: 10px;
+  width: 944px;
 }
 
 .createDuration {

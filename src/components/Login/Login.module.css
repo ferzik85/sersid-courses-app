@@ -30,12 +30,16 @@
   margin-bottom: 0;
 }
 
+.loginInput {
+  width: 266px;
+}
+
 .loginButton {
   margin: auto;
   margin-top: 0px;
   margin-bottom: 20px;
   height: 50px;
-  width: 282px;
+  width: 284px;
   font-size: 16px;
 }
 

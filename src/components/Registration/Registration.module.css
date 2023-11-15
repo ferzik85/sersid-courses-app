@@ -30,6 +30,10 @@
   margin-bottom: 0;
 }
 
+.regInput {
+  width: 266px;
+}
+
 .regButton {
   margin: auto;
   margin-top: 0px;
