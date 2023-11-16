@@ -75,12 +75,22 @@ function CreateCourse() {
 							</LabeledInput>
 							<p className={styles.createMain}>Authors List</p>
 							{fakeAuthors.map((author) => (
-								<AuthorItem key={author.id} id={author.id} name={author.name} />
+								<AuthorItem key={author.id} id={author.id} name={author.name} authorItemNameClass={styles.authorsListAuthor} />
 							))}
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
 							<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
+							{fakeAuthors.map((author) => (
+								<AuthorItem
+									key={author.id}
+									id={author.id}
+									name={author.name}
+									addIsDisabled
+									authorItemClass={styles.courseListItem}
+									authorItemNameClass={styles.courseListAuthor}
+								/>
+							))}
 						</div>
 					</div>
 				</form>

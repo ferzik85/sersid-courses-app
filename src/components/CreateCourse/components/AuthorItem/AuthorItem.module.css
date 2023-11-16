@@ -1,10 +1,16 @@
 .authorItem {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.authorItemName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .authorItemButton {
-    font-size: 18px;
-    margin-left: 10px;
+  font-size: 18px;
+  margin-left: 10px;
 }

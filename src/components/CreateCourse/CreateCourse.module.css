@@ -26,7 +26,7 @@
   font-size: 16px;
 }
 
-.createMain{
+.createMain {
   font-size: 24px;
   font-weight: 700;
   margin-top: 20px;
@@ -50,7 +50,8 @@
   width: 944px;
 }
 
-.createDuration, .createAuthor {
+.createDuration,
+.createAuthor {
   width: 400px;
 }
 
@@ -61,7 +62,7 @@
 .createAuthorsPanel {
   margin: auto;
   display: flex;
-  width: 950px;
+  width: 1050px;
 }
 
 .addAuthorsPanel {
@@ -69,7 +70,8 @@
 }
 
 .courseAuthorsPanel {
-  width: 320px
+  width: 270px;
+  margin-left: 100px;
 }
 
 .courseAuthorsPanelTitle {
@@ -77,11 +79,12 @@
   margin: auto;
   font-size: 24px;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .courseAuthorsPanelEmptyList {
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .createAuthorButton {
@@ -90,13 +93,26 @@
   margin-left: 15px;
 }
 
+.authorsListAuthor {
+  max-width: 360px;
+}
+
+.courseListItem {
+  justify-content: center;
+}
+
+.courseListAuthor {
+  max-width: 200px;
+}
+
 .createFooter {
   margin: auto;
   margin-top: 20px;
   width: 1104px;
 }
 
-.createButton, .cancelButton {
+.createButton,
+.cancelButton {
   height: 50px;
   font-size: 16px;
   float: right;
