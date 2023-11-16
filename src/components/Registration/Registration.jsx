@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
+import Header from '../Header/Header';
 import validateInput from '../../utils/ValidateInput';
+import registerUserAsync from '../../api/RegisterUser';
+
 import styles from './Registration.module.css';
 
 function Registration() {
+	const navigate = useNavigate();
 	const formId = 'registrationForm';
 	const [name, setName] = useState(null);
 	const [email, setEmail] = useState(null);
@@ -28,28 +33,44 @@ function Registration() {
 		setPasswordIsInvalid(false);
 	};
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
-		setNameIsInvalid(!validateInput(name));
-		setEmailIsInvalid(!validateInput(email));
-		setPasswordIsInvalid(!validateInput(password));
+		const invalidName = !validateInput(name);
+		const invalidEmail = !validateInput(email);
+		const invalidPassword = !validateInput(password);
+		setNameIsInvalid(invalidName);
+		setEmailIsInvalid(invalidEmail);
+		setPasswordIsInvalid(invalidPassword);
+
+		if (invalidName || invalidEmail || invalidPassword) return;
+
+		const userIsRegistered = await registerUserAsync(name, email, password);
+		if (userIsRegistered) {
+			navigate('/login', { replace: true });
+		}
 	}
 
 	return (
-		<div className={styles.reg}>
-			<b className={styles.regHeader}>Registration</b>
-			<div className={styles.regBody}>
-				<form onSubmit={handleSubmit} id={formId} className={styles.regForm}>
-					<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
-					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
-					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
-				</form>
-				<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
-				<div className={styles.regHelp}>
-					If you have an account you may <b>Login</b>
+		<>
+			<Header />
+			<div className={styles.reg}>
+				<b className={styles.regHeader}>Registration</b>
+				<div className={styles.regBody}>
+					<form onSubmit={handleSubmit} id={formId} className={styles.regForm}>
+						<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
+						<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
+						<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
+					</form>
+					<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
+					<div className={styles.regHelp}>
+						If you have an account you may{' '}
+						<Link to='/login'>
+							<b>Login</b>
+						</Link>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
