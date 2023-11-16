@@ -32,7 +32,7 @@ function App() {
 
 	return (
 		<>
-			<Header />
+			<Header showUserInfo />
 			<div className={styles.app}>
 				{isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()}
 				{/* <CreateCourse /> */}

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Header from '../Header/Header';
 import validateInput from '../../utils/ValidateInput';
 import loginUserAsync from '../../api/LoginUser';
+import { putUser, userTokenIsSet } from '../../localStorage/StorageAccess';
 import styles from './Login.module.css';
 
 function Login() {
@@ -14,6 +15,12 @@ function Login() {
 	const [password, setPassword] = useState(null);
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
+
+	useEffect(() => {
+		if (userTokenIsSet()) {
+			navigate('/courses', { replace: true });
+		}
+	}, []);
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
@@ -34,8 +41,9 @@ function Login() {
 
 		if (invalidEmail || invalidPassword) return;
 
-		const userIsLogged = await loginUserAsync(email, password);
-		if (userIsLogged) {
+		const userIsLoggedResponse = await loginUserAsync(email, password);
+		if (userIsLoggedResponse.ok) {
+			putUser(userIsLoggedResponse.name, userIsLoggedResponse.token);
 			navigate('/courses', { replace: true });
 		}
 	}

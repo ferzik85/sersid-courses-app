@@ -13,11 +13,18 @@ async function loginUserAsync(email, password) {
 				password,
 			}),
 		});
-		return response.ok;
+		const data = await response.json();
+		return {
+			ok: response.ok,
+			name: data.user.name,
+			token: data.result,
+		};
 	} catch (error) {
 		// ignore
 	}
-	return false;
+	return {
+		ok: false,
+	};
 }
 
 export default loginUserAsync;
