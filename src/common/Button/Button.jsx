@@ -1,0 +1,12 @@
+import React from 'react';
+import styles from './Button.module.css';
+
+function Button({ label, onClick }) {
+	return (
+		<button type='button' className={styles.button} onClick={onClick}>
+			{label}
+		</button>
+	);
+}
+
+export default Button;

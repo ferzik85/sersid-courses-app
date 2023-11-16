@@ -1,0 +1,16 @@
+.emptyList {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+.emptyList div {
+  margin: auto;
+  margin-top: 20px;
+}
+
+.emptyList > div:first-of-type {
+  font-weight: bold;
+  margin-top: 300px;
+}

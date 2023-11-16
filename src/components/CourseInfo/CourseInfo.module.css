@@ -1,0 +1,60 @@
+.courseInfo {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+.courseInfo > div:last-of-type {
+  width: 100%;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.courseInfoTitle {
+  font-weight: bold;
+  font-size: 24px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.courseDescription {
+  background-color: white;
+  padding: 20px;
+}
+
+.courseDescription > div:first-of-type {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+tr > td:first-of-type {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.courseDescriptionLayout {
+  display: flex;
+  margin: auto;
+}
+
+.courseDescriptionText {
+  text-align: justify;
+  border-right: 1px solid #e8e8e8;
+  padding-right: 20px;
+  width: 50%;
+}
+
+.courseDescriptionMetadata {
+  padding-left: 20px;
+}
+
+tr td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+tr td:last-of-type {
+  padding-left: 20px;
+}

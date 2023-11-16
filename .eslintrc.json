@@ -4,7 +4,7 @@
         "browser": true,
         "es2021": true
     },
-    "extends": ["airbnb", "react", "prettier"],
+    "extends": ["airbnb", "prettier"],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -13,13 +13,14 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
         "prettier"
     ],
     "rules": {
+        "react/prop-types": 0,
+        "import/prefer-default-export": "off",
         "prettier/prettier": [
             "error", {
-                "printWidth": 80,
+                "printWidth": 160,
                 "trailingComma": "es5",
                 "semi": true,
                 "jsxSingleQuote": true,
@@ -38,6 +39,6 @@
                 "importOrderSortSpecifiers": true
             }
         ],
-      "no-duplicate-imports": "error"
+        "no-duplicate-imports": "error"
     }
 }
