@@ -12,7 +12,7 @@ function Header() {
 			<div className={styles.title}>COURSES</div>
 			<div className={styles.button}>
 				<span>Sergey</span>
-				<Button label='Logout' />
+				<Button label='LOGOUT' />
 			</div>
 		</div>
 	);

@@ -33,9 +33,8 @@ function Body() {
 
 	return (
 		<div className={styles.body}>
-			{/* {isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()} */}
+			{isCourseSelected() && courseExists() ? <CourseInfo course={findCourse(courseId)} onBackClick={handleShowCourses} /> : renderCourses()}
 			{/* <CreateCourse /> <Login /><Registration /> */}
-			<CreateCourse />
 		</div>
 	);
 }

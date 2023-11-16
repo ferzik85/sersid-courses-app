@@ -49,7 +49,7 @@ function CourseInfo({ course, onBackClick }) {
 				</div>
 			</div>
 			<div>
-				<Button label='BACK' onClick={onBackClick} />
+				<Button label='BACK' onClick={onBackClick} className={styles.courseDescriptionButton} />
 			</div>
 		</div>
 	);

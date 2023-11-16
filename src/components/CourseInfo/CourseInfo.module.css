@@ -1,7 +1,7 @@
 .courseInfo {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 1125px;
   margin: auto;
 }
 .courseInfo > div:last-of-type {
@@ -21,7 +21,7 @@
 
 .courseDescription {
   background-color: white;
-  padding: 20px;
+  padding: 60px;
 }
 
 .courseDescription > div:first-of-type {
@@ -43,7 +43,8 @@ tr > td:first-of-type {
   text-align: justify;
   border-right: 1px solid #e8e8e8;
   padding-right: 20px;
-  width: 50%;
+  width: 487px;
+  font-size: 20px;
 }
 
 .courseDescriptionMetadata {
@@ -57,4 +58,9 @@ tr td {
 
 tr td:last-of-type {
   padding-left: 20px;
+}
+
+.courseDescriptionButton {
+  margin-top: 30px;
+  width: 185px;
 }

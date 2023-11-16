@@ -14,7 +14,7 @@ function Courses({ courses, onShowCourseClick }) {
 		<div className={styles.courses}>
 			<div className={styles.header}>
 				<SearchBar onSearchClick={handleSearchClick} />
-				<Button label='Add New Course' />
+				<Button label='ADD NEW COURSE' />
 			</div>
 			{courseList.map((course) => (
 				<CourseCard

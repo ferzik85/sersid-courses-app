@@ -1,17 +1,13 @@
 .courses {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
-  width: 80%;
+  width: 1122px;
   margin: auto;
 }
 
 .header {
-  width: 700px;
   display: flex;
-  flex-wrap: nowrap;
-  margin: auto;
-  margin-top: 20px;
+  margin-top: 70px;
   margin-bottom: 20px;
 }
 
