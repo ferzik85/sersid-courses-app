@@ -16,9 +16,11 @@ function Login() {
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 
+	const navigateToCourses = () => navigate('/courses', { replace: true });
+
 	useEffect(() => {
 		if (userTokenIsSet()) {
-			navigate('/courses', { replace: true });
+			navigateToCourses();
 		}
 	}, []);
 
@@ -44,7 +46,7 @@ function Login() {
 		const userIsLoggedResponse = await loginUserAsync(email, password);
 		if (userIsLoggedResponse.ok) {
 			putUser(userIsLoggedResponse.name, userIsLoggedResponse.token);
-			navigate('/courses', { replace: true });
+			navigateToCourses();
 		}
 	}
 

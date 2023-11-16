@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import styles from './Header.module.css';
 import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
