@@ -77,6 +77,8 @@ function CreateCourse() {
 		setCourseAuthors([...courseAuthors.filter((author) => author.id !== authorId)]);
 	};
 
+	const courseAuthorListIsEmpty = () => courseAuthors.length === 0;
+
 	const handleDeleteAuthor = (e, authorId) => {
 		e.preventDefault();
 		deleteAuthor(authorId);
@@ -136,17 +138,20 @@ function CreateCourse() {
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
-							<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
-							{courseAuthors.map((author) => (
-								<AuthorItem
-									key={author.id}
-									id={author.id}
-									name={author.name}
-									onDeleteClick={handleRemoveAuthorFromCourse}
-									addIsDisabled
-									authorItemClass={styles.courseListItem}
-								/>
-							))}
+							{courseAuthorListIsEmpty() ? (
+								<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
+							) : (
+								courseAuthors.map((author) => (
+									<AuthorItem
+										key={author.id}
+										id={author.id}
+										name={author.name}
+										onDeleteClick={handleRemoveAuthorFromCourse}
+										addIsDisabled
+										authorItemClass={styles.courseListItem}
+									/>
+								))
+							)}
 						</div>
 					</div>
 				</form>
