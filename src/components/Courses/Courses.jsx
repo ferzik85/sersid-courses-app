@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -18,7 +19,9 @@ function Courses() {
 		<>
 			<div className={styles.header}>
 				<SearchBar onSearchClick={handleSearchClick} />
-				<Button label='ADD NEW COURSE' />
+				<Link to='add'>
+					<Button label='ADD NEW COURSE' />
+				</Link>
 			</div>
 			{courseList.map((course) => (
 				<CourseCard

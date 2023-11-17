@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Duration from '../../common/Duration/Duration';
@@ -9,6 +10,7 @@ import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
+	const navigate = useNavigate();
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [duration, setDuration] = useState(null);
@@ -47,6 +49,7 @@ function CreateCourse() {
 		setTitleIsInvalid(!validateInput(title));
 		setDescriptionIsInvalid(!validateInput(description));
 		setDurationIsInvalid(!validateDuration(duration));
+		navigate('/courses', { replace: true });
 	}
 
 	return (
@@ -97,7 +100,9 @@ function CreateCourse() {
 			</div>
 			<div className={styles.createFooter}>
 				<Button label='CREATE COURSE' isSubmit formName={formId} className={styles.createButton} />
-				<Button label='CANCEL' className={styles.cancelButton} />
+				<Link to='courses'>
+					<Button label='CANCEL' className={styles.cancelButton} />
+				</Link>
 			</div>
 		</div>
 	);
