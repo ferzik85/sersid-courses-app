@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Header from '../Header/Header';
-import validateInput from '../../utils/ValidateInput';
+import { validateInput, validateEmail, validatePassword } from '../../utils/ValidateInput';
 import registerUserAsync from '../../api/RegisterUser';
 
 import styles from './Registration.module.css';
@@ -36,8 +36,8 @@ function Registration() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		const invalidName = !validateInput(name);
-		const invalidEmail = !validateInput(email);
-		const invalidPassword = !validateInput(password);
+		const invalidEmail = !validateEmail(email);
+		const invalidPassword = !validatePassword(password);
 		setNameIsInvalid(invalidName);
 		setEmailIsInvalid(invalidEmail);
 		setPasswordIsInvalid(invalidPassword);

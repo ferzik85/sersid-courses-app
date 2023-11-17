@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Duration from '../../common/Duration/Duration';
-import validateInput from '../../utils/ValidateInput';
+import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
 import styles from './CreateCourse.module.css';
