@@ -4,15 +4,13 @@ import styles from './EmptyCourseList.module.css';
 
 function EmptyCourseList() {
 	return (
-		<div>
-			Empty Course List
-			{/* <div className={styles.emptyList}>
-			 <div>Course List is Empty</div>
-			<div>Please use &quot;Add New Course&quot; button to add your first course</div>
-			<div>
+		<>
+			<div className={styles.emptyList}>Your List Is Empty</div>
+			<div className={styles.emptyList}>Please use &apos;Add New Course &apos; button to add your first course</div>
+			<div className={styles.emptyList}>
 				<Button label='Add New Course' />
-			</div> */}
-		</div>
+			</div>
+		</>
 	);
 }
 
