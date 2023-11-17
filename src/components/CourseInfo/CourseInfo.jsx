@@ -1,24 +1,32 @@
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import formatDate from '../../utils/FormatDate';
 import formatDuration from '../../utils/FormatDuration';
 import formatAuthors from '../../utils/FormatAuthors';
+import { getCourse } from '../../utils/GetCourses';
 import styles from './CourseInfo.module.css';
 
-function CourseInfo({ course, onBackClick }) {
+function CourseInfo() {
+	const params = useParams();
+
+	const foundCourse = getCourse(params.courseId);
+
+	const courseIsFound = () => foundCourse != null;
+
 	const formatDurationInHours = (duration) => {
 		const formattedDuration = formatDuration(duration).split(' ');
 		const formattedTime = formattedDuration[0];
 		const formattedText = formattedDuration[1];
 		return (
-			<>
+			<td>
 				<b>{formattedTime}</b> {formattedText}
-			</>
+			</td>
 		);
 	};
 
-	return (
-		<div className={styles.courseInfo}>
+	const courseElement = (course) => (
+		<>
 			<div className={styles.courseInfoTitle}>{course.title}</div>
 			<div className={styles.courseDescription}>
 				<div>Description:</div>
@@ -33,7 +41,7 @@ function CourseInfo({ course, onBackClick }) {
 								</tr>
 								<tr>
 									<td>Duration:</td>
-									<td>{formatDurationInHours(course.duration)}</td>
+									{formatDurationInHours(course.duration)}
 								</tr>
 								<tr>
 									<td>Created:</td>
@@ -48,8 +56,16 @@ function CourseInfo({ course, onBackClick }) {
 					</div>
 				</div>
 			</div>
+		</>
+	);
+
+	return (
+		<div className={styles.courseInfo}>
+			{courseIsFound() ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
 			<div>
-				<Button label='BACK' onClick={onBackClick} className={styles.courseDescriptionButton} />
+				<Link to='/courses'>
+					<Button label='BACK' className={styles.courseDescriptionButton} />
+				</Link>
 			</div>
 		</div>
 	);

@@ -1,12 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router-dom';
 import Button from '../../../../common/Button/Button';
 import formatDate from '../../../../utils/FormatDate';
 import formatDuration from '../../../../utils/FormatDuration';
 import formatAuthors from '../../../../utils/FormatAuthors';
 import styles from './CourseCard.module.css';
 
-function CourseCard({ id, title, description, creationDate, duration, authors, onShowCourseClick }) {
+function CourseCard({ id, title, description, creationDate, duration, authors }) {
 	const buttonStyle = 'material-symbols-outlined';
 	return (
 		<div className={styles.card}>
@@ -30,7 +31,9 @@ function CourseCard({ id, title, description, creationDate, duration, authors, o
 					</p>
 				</div>
 				<p className={styles.cardButtons}>
-					<Button label='SHOW COURSE' className={styles.cardShowButton} onClick={() => onShowCourseClick(id)} />
+					<Link to={id}>
+						<Button label='SHOW COURSE' className={styles.cardShowButton} />
+					</Link>
 					<Button label='delete' className={classnames(buttonStyle, styles.cardDeleteButton)} />
 					<Button label='edit' className={classnames(buttonStyle, styles.cardEditButton)} />
 				</p>
