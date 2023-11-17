@@ -8,3 +8,8 @@ export function getAuthors() {
 export function addAuthor(author) {
 	mockedAuthorsList.push({ ...author, id: uuidv4() });
 }
+
+export function deleteAuthor(id) {
+	const index = mockedAuthorsList.findIndex((author) => author.id === id);
+	if (index !== -1) mockedAuthorsList.splice(index, 1);
+}

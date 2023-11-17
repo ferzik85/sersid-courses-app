@@ -7,7 +7,7 @@ import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
 import { addCourse } from '../../utils/CoursesCrud';
-import { getAuthors, addAuthor } from '../../utils/AuthorsCrud';
+import { getAuthors, addAuthor, deleteAuthor } from '../../utils/AuthorsCrud';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
@@ -22,6 +22,7 @@ function CreateCourse() {
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
 	const [authors, setAuthors] = useState(getAuthors());
+	const [courseAuthors, setCourseAuthors] = useState([]);
 
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
@@ -49,7 +50,7 @@ function CreateCourse() {
 		setDurationIsInvalid(false);
 	};
 
-	function handleCreateAuthor(e) {
+	const handleCreateAuthor = (e) => {
 		e.preventDefault();
 		const invalidAuthorName = !validateInput(authorName);
 		setAuthorNameIsInvalid(invalidAuthorName);
@@ -59,9 +60,29 @@ function CreateCourse() {
 		addAuthor({
 			name: authorName,
 		});
-
+		setAuthors([...getAuthors()]);
 		setAuthorName(null);
-	}
+	};
+
+	const handleAddAuthorToCourse = (e, authorId) => {
+		e.preventDefault();
+		const authorWithTheSameIdAlreadyExists = courseAuthors.find((author) => author.id === authorId) != null;
+		if (authorWithTheSameIdAlreadyExists) return;
+		const authorToAdd = authors.find((author) => author.id === authorId);
+		if (authorToAdd) setCourseAuthors([...courseAuthors, authorToAdd]);
+	};
+
+	const handleRemoveAuthorFromCourse = (e, authorId) => {
+		e?.preventDefault();
+		setCourseAuthors([...courseAuthors.filter((author) => author.id !== authorId)]);
+	};
+
+	const handleDeleteAuthor = (e, authorId) => {
+		e.preventDefault();
+		deleteAuthor(authorId);
+		setAuthors([...getAuthors()]);
+		handleRemoveAuthorFromCourse(null, authorId);
+	};
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -79,7 +100,7 @@ function CreateCourse() {
 			description,
 			creationDate: getCurrentDate(),
 			duration,
-			authors: ['27cc3006-e93a-4748-8ca8-73d06aa93b6d'],
+			authors: courseAuthors.map((author) => author.id),
 		});
 		navigate('/courses', { replace: true });
 	}
@@ -106,24 +127,24 @@ function CreateCourse() {
 						<div className={styles.addAuthorsPanel}>
 							<p className={styles.createMain}>Authors</p>
 							<LabeledInput name='Author Name' isInvalid={authorNameIsInvalid} onChange={handleAuthorNameChange} inputClassName={styles.createAuthor}>
-								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} onClick={(e) => handleCreateAuthor(e)} />
+								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} onClick={handleCreateAuthor} />
 							</LabeledInput>
 							<p className={styles.createMain}>Authors List</p>
 							{authors.map((author) => (
-								<AuthorItem key={author.id} id={author.id} name={author.name} authorItemNameClass={styles.authorsListAuthor} />
+								<AuthorItem key={author.id} id={author.id} name={author.name} onAddClick={handleAddAuthorToCourse} onDeleteClick={handleDeleteAuthor} />
 							))}
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
 							<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
-							{authors.map((author) => (
+							{courseAuthors.map((author) => (
 								<AuthorItem
 									key={author.id}
 									id={author.id}
 									name={author.name}
+									onDeleteClick={handleRemoveAuthorFromCourse}
 									addIsDisabled
 									authorItemClass={styles.courseListItem}
-									authorItemNameClass={styles.courseListAuthor}
 								/>
 							))}
 						</div>

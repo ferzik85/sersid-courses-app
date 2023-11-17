@@ -16,7 +16,7 @@
 
 .createBody {
   width: 1104px;
-  height: 825px;
+  min-height: 825px;
   display: flex;
   margin: auto;
   background-color: white;
@@ -44,7 +44,7 @@
 }
 
 .createDescription {
-  height: 152px;
+  height: 100px;
   resize: none;
   padding-top: 10px;
   width: 944px;
@@ -91,10 +91,6 @@
   height: 50px;
   font-size: 16px;
   margin-left: 15px;
-}
-
-.authorsListAuthor {
-  max-width: 360px;
 }
 
 .courseListItem {
