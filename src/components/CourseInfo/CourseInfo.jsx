@@ -4,7 +4,7 @@ import Button from '../../common/Button/Button';
 import formatDate from '../../utils/FormatDate';
 import formatDuration from '../../utils/FormatDuration';
 import formatAuthors from '../../utils/FormatAuthors';
-import { getCourse } from '../../utils/GetCourses';
+import { getCourse } from '../../utils/CoursesCrud';
 import styles from './CourseInfo.module.css';
 
 function CourseInfo() {

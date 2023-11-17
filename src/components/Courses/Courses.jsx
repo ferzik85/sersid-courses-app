@@ -5,7 +5,7 @@ import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
-import { getCourses } from '../../utils/GetCourses';
+import { getCourses } from '../../utils/CoursesCrud';
 import styles from './Courses.module.css';
 
 function Courses() {

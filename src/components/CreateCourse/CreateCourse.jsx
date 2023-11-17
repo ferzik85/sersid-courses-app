@@ -6,28 +6,33 @@ import Duration from '../../common/Duration/Duration';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
+import { addCourse } from '../../utils/CoursesCrud';
+import { getAuthors, addAuthor } from '../../utils/AuthorsCrud';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
 	const navigate = useNavigate();
+	const [authorName, setAuthorName] = useState(null);
+	const [authorNameIsInvalid, setAuthorNameIsInvalid] = useState(false);
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [duration, setDuration] = useState(null);
 	const [titleIsInvalid, setTitleIsInvalid] = useState(false);
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
+	const [authors, setAuthors] = useState(getAuthors());
 
-	const fakeAuthors = [
-		{
-			id: '27cc3006-e93a-4748-8ca8-73d06aa93b6d',
-			name: 'Vasiliy Dobkin',
-		},
-		{
-			id: 'f762978b-61eb-4096-812b-ebde22838167',
-			name: 'Nicolas Kim',
-		},
-	];
+	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
+
+	function validateTitleOrDescription(value) {
+		return validateInput(value) && value.length > 1;
+	}
+
+	const handleAuthorNameChange = (value) => {
+		setAuthorName(value);
+		setAuthorNameIsInvalid(false);
+	};
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -44,11 +49,38 @@ function CreateCourse() {
 		setDurationIsInvalid(false);
 	};
 
+	function handleCreateAuthor(e) {
+		e.preventDefault();
+		const invalidAuthorName = !validateInput(authorName);
+		setAuthorNameIsInvalid(invalidAuthorName);
+
+		if (invalidAuthorName) return;
+
+		addAuthor({
+			name: authorName,
+		});
+
+		setAuthorName(null);
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
-		setTitleIsInvalid(!validateInput(title));
-		setDescriptionIsInvalid(!validateInput(description));
+		const invalidTitle = !validateTitleOrDescription(title);
+		const invalidDescription = !validateTitleOrDescription(description);
+		const invalidDuration = !validateDuration(duration);
+		setTitleIsInvalid(invalidTitle);
+		setDescriptionIsInvalid(invalidDescription);
 		setDurationIsInvalid(!validateDuration(duration));
+
+		if (invalidTitle || invalidDescription || invalidDuration) return;
+
+		addCourse({
+			title,
+			description,
+			creationDate: getCurrentDate(),
+			duration,
+			authors: ['27cc3006-e93a-4748-8ca8-73d06aa93b6d'],
+		});
 		navigate('/courses', { replace: true });
 	}
 
@@ -73,18 +105,18 @@ function CreateCourse() {
 					<div className={styles.createAuthorsPanel}>
 						<div className={styles.addAuthorsPanel}>
 							<p className={styles.createMain}>Authors</p>
-							<LabeledInput name='Author Name' isInvalid={durationIsInvalid} onChange={handleDurationChange} inputClassName={styles.createAuthor}>
-								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} />
+							<LabeledInput name='Author Name' isInvalid={authorNameIsInvalid} onChange={handleAuthorNameChange} inputClassName={styles.createAuthor}>
+								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} onClick={(e) => handleCreateAuthor(e)} />
 							</LabeledInput>
 							<p className={styles.createMain}>Authors List</p>
-							{fakeAuthors.map((author) => (
+							{authors.map((author) => (
 								<AuthorItem key={author.id} id={author.id} name={author.name} authorItemNameClass={styles.authorsListAuthor} />
 							))}
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
 							<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
-							{fakeAuthors.map((author) => (
+							{authors.map((author) => (
 								<AuthorItem
 									key={author.id}
 									id={author.id}

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import mockedCoursesList from '../data/CoursesList';
 import mockedAuthorsList from '../data/AuthorsList';
 
@@ -12,4 +13,8 @@ export function getCourses() {
 export function getCourse(id) {
 	const foundCourse = getCourses().find((course) => course.id === id) ?? null;
 	return foundCourse;
+}
+
+export function addCourse(course) {
+	mockedCoursesList.push({ ...course, id: uuidv4() });
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './AuthorItem.module.css';
 
-function AuthorItem({ id, name, authorItemClass, authorItemNameClass, addIsDisabled = false }) {
+function AuthorItem({ id, name, authorItemClass, authorItemNameClass, onAddClick, onDeleteClick, addIsDisabled = false }) {
 	const buttonStyle = 'material-symbols-outlined';
 	return (
 		<div className={classnames(styles.authorItem, authorItemClass)}>
