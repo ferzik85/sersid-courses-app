@@ -16,7 +16,6 @@
         "prettier"
     ],
     "rules": {
-        "no-unused-vars": "off",
         "react/prop-types": 0,
         "import/prefer-default-export": "off",
         "prettier/prettier": [
