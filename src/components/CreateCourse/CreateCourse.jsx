@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
@@ -13,6 +13,7 @@ import styles from './CreateCourse.module.css';
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
 	const navigate = useNavigate();
+	const createAuthorInputRef = useRef(null);
 	const [authorName, setAuthorName] = useState(null);
 	const [authorNameIsInvalid, setAuthorNameIsInvalid] = useState(false);
 	const [title, setTitle] = useState(null);
@@ -23,6 +24,10 @@ function CreateCourse() {
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
 	const [authors, setAuthors] = useState(getAuthors());
 	const [courseAuthors, setCourseAuthors] = useState([]);
+
+	const clearCreateAuthorInput = () => {
+		createAuthorInputRef.current.value = '';
+	};
 
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
@@ -60,6 +65,7 @@ function CreateCourse() {
 		addAuthor({
 			name: authorName,
 		});
+		clearCreateAuthorInput();
 		setAuthors([...getAuthors()]);
 		setAuthorName(null);
 	};
@@ -128,7 +134,13 @@ function CreateCourse() {
 					<div className={styles.createAuthorsPanel}>
 						<div className={styles.addAuthorsPanel}>
 							<p className={styles.createMain}>Authors</p>
-							<LabeledInput name='Author Name' isInvalid={authorNameIsInvalid} onChange={handleAuthorNameChange} inputClassName={styles.createAuthor}>
+							<LabeledInput
+								name='Author Name'
+								inputRef={createAuthorInputRef}
+								isInvalid={authorNameIsInvalid}
+								onChange={handleAuthorNameChange}
+								inputClassName={styles.createAuthor}
+							>
 								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} onClick={handleCreateAuthor} />
 							</LabeledInput>
 							<p className={styles.createMain}>Authors List</p>
