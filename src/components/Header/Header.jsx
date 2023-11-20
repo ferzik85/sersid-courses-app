@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'proptypes';
 import { useNavigate } from 'react-router-dom';
 import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
 import Button from '../../common/Button/Button';
@@ -36,3 +37,7 @@ function Header({ showUserInfo }) {
 }
 
 export default Header;
+
+Header.propTypes = {
+	showUserInfo: PropTypes.bool,
+};

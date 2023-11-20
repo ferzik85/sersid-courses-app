@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 import classnames from 'classnames';
 import Button from '../../../../common/Button/Button';
 import styles from './AuthorItem.module.css';
@@ -15,3 +16,12 @@ function AuthorItem({ id, name, authorItemClass, onAddClick, onDeleteClick, addI
 }
 
 export default AuthorItem;
+
+AuthorItem.propTypes = {
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	authorItemClass: PropTypes.string,
+	onAddClick: PropTypes.func,
+	onDeleteClick: PropTypes.func,
+	addIsDisabled: PropTypes.bool,
+};

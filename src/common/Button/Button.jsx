@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 import classnames from 'classnames';
 import styles from './Button.module.css';
 
@@ -11,3 +12,17 @@ function Button({ label, onClick, isSubmit = false, formName = null, className }
 }
 
 export default Button;
+
+Button.defaultProps = {
+	className: null,
+	formName: null,
+	isSubmit: false,
+};
+
+Button.propTypes = {
+	label: PropTypes.string,
+	onClick: PropTypes.func,
+	isSubmit: PropTypes.bool,
+	formName: PropTypes.string,
+	className: PropTypes.string,
+};

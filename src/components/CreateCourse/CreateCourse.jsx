@@ -109,7 +109,7 @@ function CreateCourse() {
 			title,
 			description,
 			creationDate: getCurrentDate(),
-			duration,
+			duration: +duration,
 			authors: courseAuthors.map((author) => author.id),
 		});
 		navigate('/courses', { replace: true });

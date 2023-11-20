@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import PropTypes from 'proptypes';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import styles from './SearchBar.module.css';
@@ -23,3 +24,7 @@ function SearchBar({ onSearchClick }) {
 }
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+	onSearchClick: PropTypes.func.isRequired,
+};

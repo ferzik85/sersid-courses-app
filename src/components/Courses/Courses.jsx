@@ -11,7 +11,7 @@ import styles from './Courses.module.css';
 function Courses() {
 	const [courseList, setCourses] = useState(getCourses());
 
-	const courseListIsEmpty = () => courseList.length === 0;
+	const courseListIsEmpty = () => getCourses().length === 0;
 
 	const handleSearchClick = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
 

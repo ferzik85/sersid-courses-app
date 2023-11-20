@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 import classnames from 'classnames';
 import styles from './Input.module.css';
 
@@ -9,3 +10,13 @@ function Input({ onChange, inputRef, className }) {
 }
 
 export default Input;
+
+Input.defaultProps = {
+	className: null,
+};
+
+Input.propTypes = {
+	onChange: PropTypes.func,
+	className: PropTypes.string,
+	inputRef: PropTypes.object,
+};

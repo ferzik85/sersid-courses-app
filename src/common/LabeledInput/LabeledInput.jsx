@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'proptypes';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import styles from './LabeledInput.module.css';
@@ -25,3 +26,18 @@ function LabeledInput({ name, onChange, inputRef, isInvalid, children, inputClas
 }
 
 export default LabeledInput;
+
+LabeledInput.defaultProps = {
+	inputClassName: null,
+	isTextArea: false,
+};
+
+LabeledInput.propTypes = {
+	name: PropTypes.string,
+	onChange: PropTypes.func,
+	isInvalid: PropTypes.bool,
+	inputClassName: PropTypes.string,
+	inputRef: PropTypes.object,
+	children: PropTypes.object,
+	isTextArea: PropTypes.bool,
+};

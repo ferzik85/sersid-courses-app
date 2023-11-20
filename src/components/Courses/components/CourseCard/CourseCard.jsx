@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import Button from '../../../../common/Button/Button';
@@ -44,3 +45,12 @@ function CourseCard({ id, title, description, creationDate, duration, authors })
 }
 
 export default CourseCard;
+
+CourseCard.propTypes = {
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	creationDate: PropTypes.string.isRequired,
+	duration: PropTypes.number.isRequired,
+	authors: PropTypes.array.isRequired,
+};
