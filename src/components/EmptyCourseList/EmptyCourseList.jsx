@@ -20,7 +20,7 @@ function EmptyCourseList() {
 	return (
 		<>
 			<div className={styles.emptyListRow}>Your List Is Empty</div>
-			<div className={styles.emptyListRow}>Please use &apos;Add New Course &apos; button to add your first course</div>
+			<div className={styles.emptyListRow}>Please use &apos;Add New Course&apos; button to add your first course</div>
 			<div className={styles.emptyListRow}>{isAdminUser() ? addNewCourse() : showErrorMessageToNonAdmins()}</div>
 		</>
 	);
