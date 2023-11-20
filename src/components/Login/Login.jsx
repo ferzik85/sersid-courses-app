@@ -4,13 +4,13 @@ import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Header from '../Header/Header';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
-import loginUserAsync from '../../api/LoginUser';
 import { putUser, userTokenIsSet } from '../../localStorage/StorageAccess';
+import loginUserAsync from '../../api/LoginUser';
 import styles from './Login.module.css';
 
 function Login() {
-	const navigate = useNavigate();
 	const formId = 'loginForm';
+	const navigate = useNavigate();
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import Button from '../../../../common/Button/Button';
 import formatDate from '../../../../utils/FormatDate';
 import formatDuration from '../../../../utils/FormatDuration';

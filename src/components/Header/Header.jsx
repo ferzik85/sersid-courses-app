@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../common/Button/Button';
-import styles from './Header.module.css';
 import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
+import Button from '../../common/Button/Button';
 import Logo from './components/Logo';
+import styles from './Header.module.css';
 
 function Header({ showUserInfo }) {
 	const navigate = useNavigate();
+
 	const [name, setName] = useState(null);
+
 	useEffect(() => {
 		setName(getUserName());
 	}, []);
 
-	function handleLogout() {
+	const handleLogout = () => {
 		clearLocalStorage();
 		navigate('/login', { replace: true });
-	}
+	};
 
 	return (
 		<div className={styles.header}>
@@ -26,7 +28,7 @@ function Header({ showUserInfo }) {
 			{showUserInfo ? (
 				<div className={styles.button}>
 					<span>{name}</span>
-					<Button label='LOGOUT' onClick={() => handleLogout()} />
+					<Button label='LOGOUT' onClick={handleLogout} />
 				</div>
 			) : null}
 		</div>

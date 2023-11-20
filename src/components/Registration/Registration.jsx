@@ -9,8 +9,8 @@ import registerUserAsync from '../../api/RegisterUser';
 import styles from './Registration.module.css';
 
 function Registration() {
-	const navigate = useNavigate();
 	const formId = 'registrationForm';
+	const navigate = useNavigate();
 	const [name, setName] = useState(null);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);

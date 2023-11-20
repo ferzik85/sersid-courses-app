@@ -1,9 +1,9 @@
-.emptyList {
+.emptyListRow {
   margin: auto;
   margin-top: 20px;
 }
 
-.emptyList:first-of-type {
+.emptyListRow:first-of-type {
   font-weight: bold;
   margin-top: 300px;
   font-size: 32px;

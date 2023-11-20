@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { getCourses } from '../../utils/CoursesCrud';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
-import { getCourses } from '../../utils/CoursesCrud';
 import styles from './Courses.module.css';
 
 function Courses() {
