@@ -36,7 +36,7 @@ function CreateCourse() {
 
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
-	function validateTitleOrDescriptionOrAuthorName(value) {
+	function validateInputForCourseCreate(value) {
 		return validateInput(value) && value.length > 1;
 	}
 
@@ -63,11 +63,9 @@ function CreateCourse() {
 
 	const handleCreateAuthor = (e) => {
 		e.preventDefault();
-		const invalidAuthorName = !validateTitleOrDescriptionOrAuthorName(authorName);
+		const invalidAuthorName = !validateInputForCourseCreate(authorName);
 		setAuthorNameIsInvalid(invalidAuthorName);
-
 		if (invalidAuthorName) return;
-
 		addAuthor({
 			name: authorName,
 		});
@@ -100,15 +98,13 @@ function CreateCourse() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		const invalidTitle = !validateTitleOrDescriptionOrAuthorName(title);
-		const invalidDescription = !validateTitleOrDescriptionOrAuthorName(description);
+		const invalidTitle = !validateInputForCourseCreate(title);
+		const invalidDescription = !validateInputForCourseCreate(description);
 		const invalidDuration = !validateDuration(duration);
 		setTitleIsInvalid(invalidTitle);
 		setDescriptionIsInvalid(invalidDescription);
 		setDurationIsInvalid(!validateDuration(duration));
-
 		if (invalidTitle || invalidDescription || invalidDuration) return;
-
 		addCourse({
 			title,
 			description,
