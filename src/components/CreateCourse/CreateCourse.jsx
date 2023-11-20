@@ -14,6 +14,7 @@ function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
 	const navigate = useNavigate();
 	const createAuthorInputRef = useRef(null);
+	const createDurationInputRef = useRef(null);
 	const [authorName, setAuthorName] = useState(null);
 	const [authorNameIsInvalid, setAuthorNameIsInvalid] = useState(false);
 	const [title, setTitle] = useState(null);
@@ -29,9 +30,13 @@ function CreateCourse() {
 		createAuthorInputRef.current.value = '';
 	};
 
+	const clearDurationInput = () => {
+		createDurationInputRef.current.value = '';
+	};
+
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
-	function validateTitleOrDescription(value) {
+	function validateTitleOrDescriptionOrAuthorName(value) {
 		return validateInput(value) && value.length > 1;
 	}
 
@@ -53,11 +58,12 @@ function CreateCourse() {
 	const handleDurationChange = (value) => {
 		setDuration(value);
 		setDurationIsInvalid(false);
+		if (!validateDuration(value)) clearDurationInput();
 	};
 
 	const handleCreateAuthor = (e) => {
 		e.preventDefault();
-		const invalidAuthorName = !validateInput(authorName);
+		const invalidAuthorName = !validateTitleOrDescriptionOrAuthorName(authorName);
 		setAuthorNameIsInvalid(invalidAuthorName);
 
 		if (invalidAuthorName) return;
@@ -94,8 +100,8 @@ function CreateCourse() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		const invalidTitle = !validateTitleOrDescription(title);
-		const invalidDescription = !validateTitleOrDescription(description);
+		const invalidTitle = !validateTitleOrDescriptionOrAuthorName(title);
+		const invalidDescription = !validateTitleOrDescriptionOrAuthorName(description);
 		const invalidDuration = !validateDuration(duration);
 		setTitleIsInvalid(invalidTitle);
 		setDescriptionIsInvalid(invalidDescription);
@@ -128,7 +134,13 @@ function CreateCourse() {
 						isTextArea
 					/>
 					<p className={styles.createMain}>Duration</p>
-					<LabeledInput name='Duration' isInvalid={durationIsInvalid} onChange={handleDurationChange} inputClassName={styles.createDuration}>
+					<LabeledInput
+						name='Duration'
+						inputRef={createDurationInputRef}
+						isInvalid={durationIsInvalid}
+						onChange={handleDurationChange}
+						inputClassName={styles.createDuration}
+					>
 						<Duration duration={validateDuration(duration) ? duration : 0} className={styles.durationHours} />
 					</LabeledInput>
 					<div className={styles.createAuthorsPanel}>
