@@ -16,8 +16,7 @@ async function loginUserAsync(email, password) {
 		const data = await response.json();
 		return {
 			ok: response.ok && data.successful,
-			name: data.user.name,
-			token: data.result,
+			user: { name: data.user.name, email: data.user.email, token: data.result },
 		};
 	} catch (error) {
 		// ignore

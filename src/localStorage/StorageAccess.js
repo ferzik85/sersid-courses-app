@@ -1,6 +1,6 @@
 const activeUserKey = 'activeUser';
 
-function getUser() {
+export function getUser() {
 	const user = localStorage.getItem(activeUserKey);
 	if (user != null) {
 		return JSON.parse(user);
@@ -12,9 +12,9 @@ export function clearLocalStorage() {
 	localStorage.clear();
 }
 
-export function putUser(name, token) {
+export function putUser(user) {
 	clearLocalStorage();
-	localStorage.setItem(activeUserKey, JSON.stringify({ name, token }));
+	localStorage.setItem(activeUserKey, JSON.stringify(user));
 }
 
 export function getUserName() {
