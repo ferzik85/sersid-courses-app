@@ -5,10 +5,11 @@ import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Header from '../Header/Header';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
-import { putUser, userTokenIsSet, getUserToken } from '../../localStorage/StorageAccess';
+import { putUser, userTokenIsSet, getUser } from '../../localStorage/StorageAccess';
 import { getAuthorsAsync, getCoursesAsync } from '../../services';
 import { saveAuthorsAction } from '../../store/authors/actions';
 import { saveCoursesAction } from '../../store/courses/actions';
+import { loginUserAction } from '../../store/user/actions';
 import loginUserAsync from '../../api/LoginUser';
 import styles from './Login.module.css';
 
@@ -23,6 +24,10 @@ function Login() {
 
 	const navigateToCourses = () => navigate('/courses', { replace: true });
 
+	const saveUserToStore = (user) => {
+		dispatch(loginUserAction(user));
+	};
+
 	const saveCoursesToStoreAsync = async (token) => {
 		const courses = await getCoursesAsync(token);
 		dispatch(saveCoursesAction(courses));
@@ -33,15 +38,16 @@ function Login() {
 		dispatch(saveAuthorsAction(authors));
 	};
 
-	const refreshStoreAsync = async (token) => {
-		await saveAuthorsToStoreAsync(token);
-		await saveCoursesToStoreAsync(token);
+	const refreshStoreAsync = async (user) => {
+		saveUserToStore(user);
+		await saveAuthorsToStoreAsync(user.token);
+		await saveCoursesToStoreAsync(user.token);
 		navigateToCourses();
 	};
 
 	useEffect(() => {
 		if (userTokenIsSet()) {
-			refreshStoreAsync(getUserToken());
+			refreshStoreAsync(getUser());
 		}
 	}, []);
 
@@ -66,8 +72,8 @@ function Login() {
 
 		const userIsLoggedResponse = await loginUserAsync(email, password);
 		if (userIsLoggedResponse.ok) {
-			putUser(userIsLoggedResponse.name, userIsLoggedResponse.token);
-			await refreshStoreAsync(userIsLoggedResponse.token);
+			putUser(userIsLoggedResponse.user);
+			await refreshStoreAsync(userIsLoggedResponse.user);
 		}
 	}
 
