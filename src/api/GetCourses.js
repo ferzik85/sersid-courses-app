@@ -1,30 +1,27 @@
 import { backendUrl } from '../const/AppConsts';
 
-async function loginUserAsync(email, password) {
+async function getCoursesApiAsync(token) {
 	try {
-		const response = await fetch(`${backendUrl}/login`, {
-			method: 'POST',
+		const response = await fetch(`${backendUrl}/courses/all`, {
+			method: 'Get',
 			headers: {
+				Authorization: token,
 				'Content-Type': 'application/json',
 				accept: '*/*',
 			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
 		});
 		const data = await response.json();
 		return {
 			ok: response.ok && data.successful,
-			name: data.user.name,
-			token: data.result,
+			courses: data.result ?? [],
 		};
 	} catch (error) {
 		// ignore
 	}
 	return {
 		ok: false,
+		courses: [],
 	};
 }
 
-export default loginUserAsync;
+export default getCoursesApiAsync;

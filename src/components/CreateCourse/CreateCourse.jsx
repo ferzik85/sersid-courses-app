@@ -1,18 +1,22 @@
 import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { addAuthorAction, deleteAuthorAction } from '../../store/authors/actions';
+import { addCourseAction } from '../../store/courses/actions';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Duration from '../../common/Duration/Duration';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
-import { addCourse } from '../../utils/CoursesCrud';
-import { getAuthors, addAuthor, deleteAuthor } from '../../utils/AuthorsCrud';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
+	const authors = useSelector((state) => state.authors);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const createAuthorInputRef = useRef(null);
 	const createDurationInputRef = useRef(null);
 	const [authorName, setAuthorName] = useState(null);
@@ -23,7 +27,6 @@ function CreateCourse() {
 	const [titleIsInvalid, setTitleIsInvalid] = useState(false);
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
-	const [authors, setAuthors] = useState(getAuthors());
 	const [courseAuthors, setCourseAuthors] = useState([]);
 
 	const clearCreateAuthorInput = () => {
@@ -38,6 +41,18 @@ function CreateCourse() {
 
 	function validateInputForCourseCreate(value) {
 		return validateInput(value) && value.length > 1;
+	}
+
+	function addAuthor(author) {
+		dispatch(addAuthorAction({ ...author, id: uuidv4() }));
+	}
+
+	function deleteAuthor(id) {
+		dispatch(deleteAuthorAction(id));
+	}
+
+	function addCourse(course) {
+		dispatch(addCourseAction({ ...course, id: uuidv4() }));
 	}
 
 	const handleAuthorNameChange = (value) => {
@@ -70,7 +85,6 @@ function CreateCourse() {
 			name: authorName,
 		});
 		clearCreateAuthorInput();
-		setAuthors([...getAuthors()]);
 		setAuthorName(null);
 	};
 
@@ -92,7 +106,6 @@ function CreateCourse() {
 	const handleDeleteAuthor = (e, authorId) => {
 		e.preventDefault();
 		deleteAuthor(authorId);
-		setAuthors([...getAuthors()]);
 		handleRemoveAuthorFromCourse(null, authorId);
 	};
 

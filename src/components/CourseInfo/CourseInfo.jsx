@@ -1,16 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import Duration from '../../common/Duration/Duration';
 import formatDate from '../../utils/FormatDate';
 import formatAuthors from '../../utils/FormatAuthors';
-import { getCourse } from '../../utils/CoursesCrud';
+import { getCourse } from '../../utils/CoursesHelper';
 import styles from './CourseInfo.module.css';
 
 function CourseInfo() {
 	const params = useParams();
-
-	const foundCourse = getCourse(params.courseId);
+	const authors = useSelector((state) => state.authors);
+	const courses = useSelector((state) => state.courses);
+	const foundCourse = getCourse(params.courseId, courses, authors);
 
 	const courseIsFound = () => foundCourse != null;
 

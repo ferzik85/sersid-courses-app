@@ -2,7 +2,7 @@ const activeUserKey = 'activeUser';
 
 function getUser() {
 	const user = localStorage.getItem(activeUserKey);
-	if (user !== null) {
+	if (user != null) {
 		return JSON.parse(user);
 	}
 	return null;

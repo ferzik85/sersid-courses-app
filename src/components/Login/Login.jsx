@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import Header from '../Header/Header';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
-import { putUser, userTokenIsSet } from '../../localStorage/StorageAccess';
+import { putUser, userTokenIsSet, getUserToken } from '../../localStorage/StorageAccess';
+import { getAuthorsAsync, getCoursesAsync } from '../../services';
+import { saveAuthorsAction } from '../../store/authors/actions';
+import { saveCoursesAction } from '../../store/courses/actions';
 import loginUserAsync from '../../api/LoginUser';
 import styles from './Login.module.css';
 
 function Login() {
 	const formId = 'loginForm';
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -18,9 +23,25 @@ function Login() {
 
 	const navigateToCourses = () => navigate('/courses', { replace: true });
 
+	const saveCoursesToStoreAsync = async (token) => {
+		const courses = await getCoursesAsync(token);
+		dispatch(saveCoursesAction(courses));
+	};
+
+	const saveAuthorsToStoreAsync = async (token) => {
+		const authors = await getAuthorsAsync(token);
+		dispatch(saveAuthorsAction(authors));
+	};
+
+	const refreshStoreAsync = async (token) => {
+		await saveAuthorsToStoreAsync(token);
+		await saveCoursesToStoreAsync(token);
+		navigateToCourses();
+	};
+
 	useEffect(() => {
 		if (userTokenIsSet()) {
-			navigateToCourses();
+			refreshStoreAsync(getUserToken());
 		}
 	}, []);
 
@@ -46,7 +67,7 @@ function Login() {
 		const userIsLoggedResponse = await loginUserAsync(email, password);
 		if (userIsLoggedResponse.ok) {
 			putUser(userIsLoggedResponse.name, userIsLoggedResponse.token);
-			navigateToCourses();
+			await refreshStoreAsync(userIsLoggedResponse.token);
 		}
 	}
 

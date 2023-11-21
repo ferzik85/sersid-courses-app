@@ -14,7 +14,8 @@ async function registerUserAsync(name, email, password) {
 				password,
 			}),
 		});
-		return response.ok;
+		const data = await response.json();
+		return response.ok && data.successful;
 	} catch (error) {
 		// ignore
 	}

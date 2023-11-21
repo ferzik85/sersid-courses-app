@@ -1,18 +1,20 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCourses } from '../../utils/CoursesCrud';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
+import { combineCoursesWithAuthors } from '../../utils/CoursesHelper';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import styles from './Courses.module.css';
 
 function Courses() {
-	const [courseList, setCourses] = useState(getCourses());
-
-	const courseListIsEmpty = () => getCourses().length === 0;
-
+	const authors = useSelector((state) => state.authors);
+	const courses = useSelector((state) => state.courses);
+	const coursesWithAuthors = combineCoursesWithAuthors(courses, authors);
+	const [courseList, setCourses] = useState(coursesWithAuthors);
+	const courseListIsEmpty = () => coursesWithAuthors.length === 0;
 	const handleSearchClick = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
 
 	const courseListElement = (
