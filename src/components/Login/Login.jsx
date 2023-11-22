@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
-import Header from '../Header/Header';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
 import { putUser, userTokenIsSet } from '../../localStorage/StorageAccess';
 import loginUserAsync from '../../api/LoginUser';
@@ -55,25 +54,22 @@ function Login() {
 	}
 
 	return (
-		<>
-			<Header />
-			<div className={styles.login}>
-				<b className={styles.loginHeader}>Login</b>
-				<div className={styles.loginBody}>
-					<form onSubmit={handleSubmit} id={formId} className={styles.loginForm}>
-						<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
-						<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
-					</form>
-					<Button label='LOGIN' type='submit' formName={formId} className={styles.loginButton} />
-					<div className={styles.loginHelp}>
-						If you don&apos;t have an account you may{' '}
-						<Link to='/registration'>
-							<b>Register</b>
-						</Link>
-					</div>
+		<div className={styles.login}>
+			<b className={styles.loginHeader}>Login</b>
+			<div className={styles.loginBody}>
+				<form onSubmit={handleSubmit} id={formId} className={styles.loginForm}>
+					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
+					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
+				</form>
+				<Button label='LOGIN' type='submit' formName={formId} className={styles.loginButton} />
+				<div className={styles.loginHelp}>
+					If you don&apos;t have an account you may{' '}
+					<Link to='/registration'>
+						<b>Register</b>
+					</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

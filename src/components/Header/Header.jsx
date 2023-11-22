@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
+import { getUserName, clearLocalStorage, userTokenIsSet } from '../../localStorage/StorageAccess';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo';
 import styles from './Header.module.css';
 
-function Header({ showUserInfo }) {
+function Header() {
 	const navigate = useNavigate();
-
-	const [name, setName] = useState(getUserName());
-
-	useEffect(() => {
-		setName(getUserName());
-	}, []);
-
+	const name = getUserName();
 	const handleLogout = () => {
 		clearLocalStorage();
 		navigate('/login');
@@ -26,7 +19,7 @@ function Header({ showUserInfo }) {
 				<Logo />
 			</div>
 			<div className={styles.title}>COURSES</div>
-			{showUserInfo ? (
+			{userTokenIsSet() ? (
 				<div className={styles.button}>
 					<span>{name}</span>
 					<Button label='LOGOUT' onClick={handleLogout} />
@@ -37,7 +30,3 @@ function Header({ showUserInfo }) {
 }
 
 export default Header;
-
-Header.propTypes = {
-	showUserInfo: PropTypes.bool,
-};
