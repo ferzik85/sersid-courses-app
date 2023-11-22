@@ -55,10 +55,6 @@
   width: 400px;
 }
 
-.durationHours {
-  margin-left: 15px;
-}
-
 .createAuthorsPanel {
   margin: auto;
   display: flex;
@@ -85,12 +81,6 @@
 .courseAuthorsPanelEmptyList {
   text-align: center;
   margin-bottom: 20px;
-}
-
-.createAuthorButton {
-  height: 50px;
-  font-size: 16px;
-  margin-left: 15px;
 }
 
 .courseListItem {

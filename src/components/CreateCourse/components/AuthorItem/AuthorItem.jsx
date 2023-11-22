@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../../../../common/Button/Button';
 import styles from './AuthorItem.module.css';

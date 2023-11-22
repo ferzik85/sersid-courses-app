@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,7 +6,8 @@ import { addAuthorAction, deleteAuthorAction } from '../../store/authors/actions
 import { addCourseAction } from '../../store/courses/actions';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
-import Duration from '../../common/Duration/Duration';
+import { ButtonInput } from '../../common/ButtonInput';
+import { DurationInput } from '../../common/DurationInput';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
@@ -17,10 +18,6 @@ function CreateCourse() {
 	const authors = useSelector((state) => state.authors);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const createAuthorInputRef = useRef(null);
-	const createDurationInputRef = useRef(null);
-	const [authorName, setAuthorName] = useState(null);
-	const [authorNameIsInvalid, setAuthorNameIsInvalid] = useState(false);
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [duration, setDuration] = useState(null);
@@ -29,19 +26,9 @@ function CreateCourse() {
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
 	const [courseAuthors, setCourseAuthors] = useState([]);
 
-	const clearCreateAuthorInput = () => {
-		createAuthorInputRef.current.value = '';
-	};
-
-	const clearDurationInput = () => {
-		createDurationInputRef.current.value = '';
-	};
-
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
-	function validateInputForCourseCreate(value) {
-		return validateInput(value) && value.length > 1;
-	}
+	const validateInputForCourseCreate = (value) => validateInput(value) && value.length > 1;
 
 	function addAuthor(author) {
 		dispatch(addAuthorAction({ ...author, id: uuidv4() }));
@@ -54,11 +41,6 @@ function CreateCourse() {
 	function addCourse(course) {
 		dispatch(addCourseAction({ ...course, id: uuidv4() }));
 	}
-
-	const handleAuthorNameChange = (value) => {
-		setAuthorName(value);
-		setAuthorNameIsInvalid(false);
-	};
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -73,19 +55,12 @@ function CreateCourse() {
 	const handleDurationChange = (value) => {
 		setDuration(value);
 		setDurationIsInvalid(false);
-		if (!validateDuration(value)) clearDurationInput();
 	};
 
-	const handleCreateAuthor = (e) => {
-		e.preventDefault();
-		const invalidAuthorName = !validateInputForCourseCreate(authorName);
-		setAuthorNameIsInvalid(invalidAuthorName);
-		if (invalidAuthorName) return;
+	const handleCreateAuthor = (name) => {
 		addAuthor({
-			name: authorName,
+			name,
 		});
-		clearCreateAuthorInput();
-		setAuthorName(null);
 	};
 
 	const handleAddAuthorToCourse = (e, authorId) => {
@@ -125,7 +100,7 @@ function CreateCourse() {
 			duration: +duration,
 			authors: courseAuthors.map((author) => author.id),
 		});
-		navigate('/courses', { replace: true });
+		navigate('/courses');
 	}
 
 	return (
@@ -143,27 +118,23 @@ function CreateCourse() {
 						isTextArea
 					/>
 					<p className={styles.createMain}>Duration</p>
-					<LabeledInput
+					<DurationInput
 						name='Duration'
-						inputRef={createDurationInputRef}
-						isInvalid={durationIsInvalid}
+						duration={duration}
 						onChange={handleDurationChange}
+						isInvalid={durationIsInvalid}
 						inputClassName={styles.createDuration}
-					>
-						<Duration duration={validateDuration(duration) ? duration : 0} className={styles.durationHours} />
-					</LabeledInput>
+					/>
 					<div className={styles.createAuthorsPanel}>
 						<div className={styles.addAuthorsPanel}>
 							<p className={styles.createMain}>Authors</p>
-							<LabeledInput
-								name='Author Name'
-								inputRef={createAuthorInputRef}
-								isInvalid={authorNameIsInvalid}
-								onChange={handleAuthorNameChange}
+							<ButtonInput
+								labelName='Author Name'
+								buttonName='CREATE AUTHOR'
+								onClick={handleCreateAuthor}
+								validateInput={validateInputForCourseCreate}
 								inputClassName={styles.createAuthor}
-							>
-								<Button label='CREATE AUTHOR' className={styles.createAuthorButton} onClick={handleCreateAuthor} />
-							</LabeledInput>
+							/>
 							<p className={styles.createMain}>Authors List</p>
 							{authors.map((author) => (
 								<AuthorItem key={author.id} id={author.id} name={author.name} onAddClick={handleAddAuthorToCourse} onDeleteClick={handleDeleteAuthor} />
@@ -190,7 +161,7 @@ function CreateCourse() {
 				</form>
 			</div>
 			<div className={styles.createFooter}>
-				<Button label='CREATE COURSE' isSubmit formName={formId} className={styles.createButton} />
+				<Button label='CREATE COURSE' type='submit' formName={formId} className={styles.createButton} />
 				<Link to='courses'>
 					<Button label='CANCEL' className={styles.cancelButton} />
 				</Link>

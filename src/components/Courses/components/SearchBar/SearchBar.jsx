@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import styles from './SearchBar.module.css';

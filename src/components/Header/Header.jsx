@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'proptypes';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearLocalStorage, userTokenIsSet } from '../../localStorage/StorageAccess';
 import { logoutUserAction } from '../../store/user/actions';
-import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo';
 import styles from './Header.module.css';
 
-function Header({ showUserInfo }) {
-	const navigate = useNavigate();
+function Header() {
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.user.name);
+	const navigate = useNavigate();
 	const handleLogout = () => {
 		clearLocalStorage();
 		dispatch(logoutUserAction());
-		navigate('/login', { replace: true });
+		navigate('/login');
 	};
+	const user = useSelector((state) => state.user.name);
 
 	return (
 		<div className={styles.header}>
@@ -24,7 +23,7 @@ function Header({ showUserInfo }) {
 				<Logo />
 			</div>
 			<div className={styles.title}>COURSES</div>
-			{showUserInfo ? (
+			{userTokenIsSet() ? (
 				<div className={styles.button}>
 					<span>{user}</span>
 					<Button label='LOGOUT' onClick={handleLogout} />
@@ -35,7 +34,3 @@ function Header({ showUserInfo }) {
 }
 
 export default Header;
-
-Header.propTypes = {
-	showUserInfo: PropTypes.bool,
-};

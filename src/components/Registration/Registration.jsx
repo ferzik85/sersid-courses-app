@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
-import Header from '../Header/Header';
 import { validateInput, validateEmail, validatePassword } from '../../utils/ValidateInput';
 import registerUserAsync from '../../api/RegisterUser';
 
 import styles from './Registration.module.css';
 
 function Registration() {
-	const formId = 'registrationForm';
 	const navigate = useNavigate();
 	const [name, setName] = useState(null);
 	const [email, setEmail] = useState(null);
@@ -46,31 +44,28 @@ function Registration() {
 
 		const userIsRegistered = await registerUserAsync(name, email, password);
 		if (userIsRegistered) {
-			navigate('/login', { replace: true });
+			navigate('/login');
 		}
 	}
 
 	return (
-		<>
-			<Header />
-			<div className={styles.reg}>
-				<b className={styles.regHeader}>Registration</b>
-				<div className={styles.regBody}>
-					<form onSubmit={handleSubmit} id={formId} className={styles.regForm}>
-						<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
-						<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
-						<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
-					</form>
-					<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
-					<div className={styles.regHelp}>
-						If you have an account you may{' '}
-						<Link to='/login'>
-							<b>Login</b>
-						</Link>
-					</div>
+		<div className={styles.reg}>
+			<b className={styles.regHeader}>Registration</b>
+			<div className={styles.regBody}>
+				<form onSubmit={handleSubmit} className={styles.regForm}>
+					<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
+					<Button label='REGISTER' type='submit' className={styles.regButton} />
+				</form>
+				<div className={styles.regHelp}>
+					If you have an account you may{' '}
+					<Link to='/login'>
+						<b>Login</b>
+					</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

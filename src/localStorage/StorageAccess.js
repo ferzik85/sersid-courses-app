@@ -25,6 +25,10 @@ export function getUserToken() {
 	return getUser()?.token;
 }
 
+export function getUserRole() {
+	return getUser()?.role;
+}
+
 export function userTokenIsSet() {
 	return getUser()?.token != null;
 }
