@@ -1,8 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import styles from './Input.module.css';
 
-function Input({ onChange }) {
-	return <input type='text' className={styles.input} placeholder='Search course ...' onChange={(e) => onChange(e.target.value)} />;
+function Input({ onChange, inputRef, className }) {
+	return (
+		<input type='text' ref={inputRef} className={classnames(styles.input, className)} placeholder='Input text' onChange={(e) => onChange(e.target.value)} />
+	);
 }
 
 export default Input;
+
+Input.defaultProps = {
+	className: null,
+};
+
+Input.propTypes = {
+	onChange: PropTypes.func,
+	className: PropTypes.string,
+	inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
+};

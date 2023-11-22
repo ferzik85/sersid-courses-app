@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import styles from './SearchBar.module.css';
@@ -16,12 +17,14 @@ function SearchBar({ onSearchClick }) {
 
 	return (
 		<div className={styles.searchBar}>
-			<div className={styles.searchInput}>
-				<Input onChange={handleChange} />
-			</div>
-			<Button label='Search' onClick={() => onSearchClick(searchValue)} />
+			<Input onChange={handleChange} className={styles.searchInput} />
+			<Button label='SEARCH' onClick={() => onSearchClick(searchValue)} />
 		</div>
 	);
 }
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+	onSearchClick: PropTypes.func.isRequired,
+};

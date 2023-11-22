@@ -1,55 +1,56 @@
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from '../../common/Button/Button';
+import Duration from '../../common/Duration/Duration';
 import formatDate from '../../utils/FormatDate';
-import formatDuration from '../../utils/FormatDuration';
 import formatAuthors from '../../utils/FormatAuthors';
+import { getCourse } from '../../utils/CoursesCrud';
 import styles from './CourseInfo.module.css';
 
-function CourseInfo({ course, onBackClick }) {
-	const formatDurationInHours = (duration) => {
-		const formattedDuration = formatDuration(duration).split(' ');
-		const formattedTime = formattedDuration[0];
-		const formattedText = formattedDuration[1];
-		return (
-			<>
-				<b>{formattedTime}</b> {formattedText}
-			</>
-		);
-	};
+function CourseInfo() {
+	const params = useParams();
 
-	return (
-		<div className={styles.courseInfo}>
+	const foundCourse = getCourse(params.courseId);
+
+	const courseIsFound = () => foundCourse != null;
+
+	const courseElement = (course) => (
+		<>
 			<div className={styles.courseInfoTitle}>{course.title}</div>
 			<div className={styles.courseDescription}>
 				<div>Description:</div>
 				<div className={styles.courseDescriptionLayout}>
 					<div className={styles.courseDescriptionText}>{course.description}</div>
 					<div className={styles.courseDescriptionMetadata}>
-						<table>
-							<tbody>
-								<tr>
-									<td>ID:</td>
-									<td>{course.id}</td>
-								</tr>
-								<tr>
-									<td>Duration:</td>
-									<td>{formatDurationInHours(course.duration)}</td>
-								</tr>
-								<tr>
-									<td>Created:</td>
-									<td>{formatDate(course.creationDate)}</td>
-								</tr>
-								<tr>
-									<td>Authors:</td>
-									<td>{formatAuthors(course.authors)}</td>
-								</tr>
-							</tbody>
-						</table>
+						<div>
+							<span>ID:</span>
+							<span>{course.id}</span>
+						</div>
+						<div>
+							<span>Duration:</span>
+							<Duration duration={course.duration} />
+						</div>
+						<div>
+							<span>Created:</span>
+							<span>{formatDate(course.creationDate)}</span>
+						</div>
+						<div>
+							<span>Authors:</span>
+							<span>{formatAuthors(course.authors)}</span>
+						</div>
 					</div>
 				</div>
 			</div>
+		</>
+	);
+
+	return (
+		<div className={styles.courseInfo}>
+			{courseIsFound() ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
 			<div>
-				<Button label='BACK' onClick={onBackClick} />
+				<Link to='/courses'>
+					<Button label='BACK' className={styles.courseDescriptionButton} />
+				</Link>
 			</div>
 		</div>
 	);

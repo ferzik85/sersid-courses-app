@@ -16,7 +16,8 @@
         "prettier"
     ],
     "rules": {
-        "react/prop-types": 0,
+        "react/button-has-type": "off",
+        "react/require-default-props": "off",
         "import/prefer-default-export": "off",
         "prettier/prettier": [
             "error", {
@@ -38,6 +39,12 @@
                 "importOrderSeparation": true,
                 "importOrderSortSpecifiers": true
             }
+        ],
+        "jsx-a11y/label-has-associated-control": [ 
+            2, {
+            "controlComponents": ["Input", "TextArea"],
+            "depth": 2
+          }
         ],
         "no-duplicate-imports": "error"
     }

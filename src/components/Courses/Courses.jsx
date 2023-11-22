@@ -1,20 +1,27 @@
 import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { getCourses } from '../../utils/CoursesCrud';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
+import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import styles from './Courses.module.css';
 
-function Courses({ courses, onShowCourseClick }) {
-	const [courseList, setCourses] = useState(courses);
+function Courses() {
+	const [courseList, setCourses] = useState(getCourses());
+
+	const courseListIsEmpty = () => getCourses().length === 0;
 
 	const handleSearchClick = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
 
-	return (
-		<div className={styles.courses}>
+	const courseListElement = (
+		<>
 			<div className={styles.header}>
 				<SearchBar onSearchClick={handleSearchClick} />
-				<Button label='Add New Course' />
+				<Link to='add'>
+					<Button label='ADD NEW COURSE' />
+				</Link>
 			</div>
 			{courseList.map((course) => (
 				<CourseCard
@@ -25,11 +32,14 @@ function Courses({ courses, onShowCourseClick }) {
 					creationDate={course.creationDate}
 					duration={course.duration}
 					authors={course.authors}
-					onShowCourseClick={onShowCourseClick}
 				/>
 			))}
-		</div>
+		</>
 	);
+
+	const renderCourses = () => (courseListIsEmpty() ? <EmptyCourseList /> : courseListElement);
+
+	return <div className={styles.courses}>{renderCourses()}</div>;
 }
 
 export default Courses;
