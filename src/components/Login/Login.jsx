@@ -9,7 +9,6 @@ import { getMeAsync } from '../../api/GetMe';
 import styles from './Login.module.css';
 
 function Login() {
-	const formId = 'loginForm';
 	const navigate = useNavigate();
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -57,11 +56,11 @@ function Login() {
 		<div className={styles.login}>
 			<b className={styles.loginHeader}>Login</b>
 			<div className={styles.loginBody}>
-				<form onSubmit={handleSubmit} id={formId} className={styles.loginForm}>
+				<form onSubmit={handleSubmit} className={styles.loginForm}>
 					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
 					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
+					<Button label='LOGIN' type='submit' className={styles.loginButton} />
 				</form>
-				<Button label='LOGIN' type='submit' formName={formId} className={styles.loginButton} />
 				<div className={styles.loginHelp}>
 					If you don&apos;t have an account you may{' '}
 					<Link to='/registration'>
