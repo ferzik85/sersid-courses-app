@@ -46,7 +46,7 @@ function Registration() {
 
 		const userIsRegistered = await registerUserAsync(name, email, password);
 		if (userIsRegistered) {
-			navigate('/login', { replace: true });
+			navigate('/login');
 		}
 	}
 
@@ -61,7 +61,7 @@ function Registration() {
 						<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
 						<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
 					</form>
-					<Button label='REGISTER' isSubmit formName={formId} className={styles.regButton} />
+					<Button label='REGISTER' type='submit' formName={formId} className={styles.regButton} />
 					<div className={styles.regHelp}>
 						If you have an account you may{' '}
 						<Link to='/login'>

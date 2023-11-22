@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './Input.module.css';
 
@@ -18,5 +18,5 @@ Input.defaultProps = {
 Input.propTypes = {
 	onChange: PropTypes.func,
 	className: PropTypes.string,
-	inputRef: PropTypes.object,
+	inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
 };

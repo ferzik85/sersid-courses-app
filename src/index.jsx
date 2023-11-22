@@ -14,7 +14,7 @@ root.render(
 	<BrowserRouter>
 		<Routes path='/'>
 			<Route path='login' element={<Login />} />
-			<Route path='register' element={<Registration />} />
+			<Route path='registration' element={<Registration />} />
 			<Route path='courses' element={<App />}>
 				<Route path=':courseId' element={<CourseInfo />} />
 				<Route path='add' element={<CreateCourse />} />

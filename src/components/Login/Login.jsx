@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
 import { putUser, userTokenIsSet } from '../../localStorage/StorageAccess';
 import loginUserAsync from '../../api/LoginUser';
+import { getMeAsync } from '../../api/GetMe';
 import styles from './Login.module.css';
 
 function Login() {
@@ -16,11 +17,11 @@ function Login() {
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 
-	const navigateToCourses = () => navigate('/courses', { replace: true });
+	const navigateToCourses = (useRedirect) => navigate('/courses', { replace: useRedirect });
 
 	useEffect(() => {
 		if (userTokenIsSet()) {
-			navigateToCourses();
+			navigateToCourses(true);
 		}
 	}, []);
 
@@ -45,8 +46,11 @@ function Login() {
 
 		const userIsLoggedResponse = await loginUserAsync(email, password);
 		if (userIsLoggedResponse.ok) {
-			putUser(userIsLoggedResponse.name, userIsLoggedResponse.token);
-			navigateToCourses();
+			const me = await getMeAsync(userIsLoggedResponse.token);
+			if (me.ok) {
+				putUser(userIsLoggedResponse.name, userIsLoggedResponse.token, me.role);
+				navigateToCourses(false);
+			}
 		}
 	}
 
@@ -60,10 +64,10 @@ function Login() {
 						<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
 						<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
 					</form>
-					<Button label='LOGIN' isSubmit formName={formId} className={styles.loginButton} />
+					<Button label='LOGIN' type='submit' formName={formId} className={styles.loginButton} />
 					<div className={styles.loginHelp}>
 						If you don&apos;t have an account you may{' '}
-						<Link to='/register'>
+						<Link to='/registration'>
 							<b>Register</b>
 						</Link>
 					</div>

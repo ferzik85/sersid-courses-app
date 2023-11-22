@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getUserName, clearLocalStorage } from '../../localStorage/StorageAccess';
 import Button from '../../common/Button/Button';
@@ -9,7 +9,7 @@ import styles from './Header.module.css';
 function Header({ showUserInfo }) {
 	const navigate = useNavigate();
 
-	const [name, setName] = useState(null);
+	const [name, setName] = useState(getUserName());
 
 	useEffect(() => {
 		setName(getUserName());
@@ -17,7 +17,7 @@ function Header({ showUserInfo }) {
 
 	const handleLogout = () => {
 		clearLocalStorage();
-		navigate('/login', { replace: true });
+		navigate('/login');
 	};
 
 	return (

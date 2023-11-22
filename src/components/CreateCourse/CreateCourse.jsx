@@ -112,7 +112,7 @@ function CreateCourse() {
 			duration: +duration,
 			authors: courseAuthors.map((author) => author.id),
 		});
-		navigate('/courses', { replace: true });
+		navigate('/courses');
 	}
 
 	return (
@@ -177,7 +177,7 @@ function CreateCourse() {
 				</form>
 			</div>
 			<div className={styles.createFooter}>
-				<Button label='CREATE COURSE' isSubmit formName={formId} className={styles.createButton} />
+				<Button label='CREATE COURSE' type='submit' formName={formId} className={styles.createButton} />
 				<Link to='courses'>
 					<Button label='CANCEL' className={styles.cancelButton} />
 				</Link>

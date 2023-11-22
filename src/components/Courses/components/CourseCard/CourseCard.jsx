@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import Button from '../../../../common/Button/Button';
@@ -52,5 +52,5 @@ CourseCard.propTypes = {
 	description: PropTypes.string.isRequired,
 	creationDate: PropTypes.string.isRequired,
 	duration: PropTypes.number.isRequired,
-	authors: PropTypes.array.isRequired,
+	authors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

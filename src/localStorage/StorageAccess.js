@@ -12,9 +12,9 @@ export function clearLocalStorage() {
 	localStorage.clear();
 }
 
-export function putUser(name, token) {
+export function putUser(name, token, role) {
 	clearLocalStorage();
-	localStorage.setItem(activeUserKey, JSON.stringify({ name, token }));
+	localStorage.setItem(activeUserKey, JSON.stringify({ name, token, role }));
 }
 
 export function getUserName() {
@@ -23,6 +23,10 @@ export function getUserName() {
 
 export function getUserToken() {
 	return getUser()?.token;
+}
+
+export function getUserRole() {
+	return getUser()?.role;
 }
 
 export function userTokenIsSet() {
