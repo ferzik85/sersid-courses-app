@@ -71,8 +71,9 @@ function Login() {
 		if (userIsLoggedResponse.ok) {
 			const me = await getMeAsync(userIsLoggedResponse.user.token);
 			if (me.ok) {
-				putUser({ ...userIsLoggedResponse.user, role: me.role });
-				await refreshStoreAsync(userIsLoggedResponse.user);
+				const user = { ...userIsLoggedResponse.user, role: me.role };
+				putUser(user);
+				await refreshStoreAsync(user);
 				navigateToCourses(false);
 			}
 		}

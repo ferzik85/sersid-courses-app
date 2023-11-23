@@ -1,21 +1,22 @@
 /* eslint-disable default-param-last */
 import { LOGIN_USER, LOGOUT_USER } from './types';
 
-function createUser(isAuth, name, email, token) {
+function createUser(isAuth, name, email, token, role) {
 	return {
 		isAuth,
 		name,
 		email,
 		token,
+		role,
 	};
 }
 
 function logoutUser() {
-	return createUser(false, '', '', '');
+	return createUser(false, '', '', '', '');
 }
 
-function loginUser({ name, email, token }) {
-	return createUser(true, name, email, token);
+function loginUser({ name, email, token, role }) {
+	return createUser(true, name, email, token, role);
 }
 
 export const userInitialState = logoutUser();
