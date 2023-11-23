@@ -30,17 +30,11 @@ function CreateCourse() {
 
 	const validateInputForCourseCreate = (value) => validateInput(value) && value.length > 1;
 
-	function addAuthor(author) {
-		dispatch(addAuthorAction({ ...author, id: uuidv4() }));
-	}
+	const handleCreateAuthor = (name) => dispatch(addAuthorAction({ name, id: uuidv4() }));
 
-	function deleteAuthor(id) {
-		dispatch(deleteAuthorAction(id));
-	}
+	const deleteAuthor = (id) => dispatch(deleteAuthorAction(id));
 
-	function addCourse(course) {
-		dispatch(addCourseAction({ ...course, id: uuidv4() }));
-	}
+	const addCourse = (course) => dispatch(addCourseAction({ ...course, id: uuidv4() }));
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -57,12 +51,6 @@ function CreateCourse() {
 		setDurationIsInvalid(false);
 	};
 
-	const handleCreateAuthor = (name) => {
-		addAuthor({
-			name,
-		});
-	};
-
 	const handleAddAuthorToCourse = (e, authorId) => {
 		e.preventDefault();
 		const authorWithTheSameIdAlreadyExists = courseAuthors.find((author) => author.id === authorId) != null;
@@ -76,7 +64,7 @@ function CreateCourse() {
 		setCourseAuthors([...courseAuthors.filter((author) => author.id !== authorId)]);
 	};
 
-	const courseAuthorListIsEmpty = () => courseAuthors.length === 0;
+	const courseAuthorListIsEmpty = courseAuthors.length === 0;
 
 	const handleDeleteAuthor = (e, authorId) => {
 		e.preventDefault();
@@ -142,7 +130,7 @@ function CreateCourse() {
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
-							{courseAuthorListIsEmpty() ? (
+							{courseAuthorListIsEmpty ? (
 								<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
 							) : (
 								courseAuthors.map((author) => (

@@ -23,9 +23,7 @@ function Login() {
 
 	const navigateToCourses = (useRedirect) => navigate('/courses', { replace: useRedirect });
 
-	const saveUserToStore = (user) => {
-		dispatch(loginUserAction(user));
-	};
+	const saveUserToStore = (user) => dispatch(loginUserAction(user));
 
 	const saveCoursesToStoreAsync = async (token) => {
 		const courses = await getCoursesAsync(token);

@@ -13,8 +13,7 @@ function CourseInfo() {
 	const authors = useSelector((state) => state.authors);
 	const courses = useSelector((state) => state.courses);
 	const foundCourse = getCourse(params.courseId, courses, authors);
-
-	const courseIsFound = () => foundCourse != null;
+	const courseIsFound = foundCourse != null;
 
 	const courseElement = (course) => (
 		<>
@@ -48,7 +47,7 @@ function CourseInfo() {
 
 	return (
 		<div className={styles.courseInfo}>
-			{courseIsFound() ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
+			{courseIsFound ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
 			<div>
 				<Link to='/courses'>
 					<Button label='BACK' className={styles.courseDescriptionButton} />
