@@ -172,7 +172,7 @@ function CreateCourse() {
 			</div>
 			<div className={styles.createFooter}>
 				<Button label='CREATE COURSE' type='submit' formName={formId} className={styles.createButton} />
-				<Link to='courses'>
+				<Link to='/courses'>
 					<Button label='CANCEL' className={styles.cancelButton} />
 				</Link>
 			</div>

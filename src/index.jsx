@@ -9,8 +9,13 @@ import CourseInfo from './components/CourseInfo/CourseInfo';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import { Layout } from './components/Layout';
 import { PrivateRoute } from './components/PrivateRoute';
+import { getCourses } from './store/courses/thunk';
+import { getAuthors } from './store/authors/thunk';
 import App from './App';
 import store from './store';
+
+store.dispatch(getAuthors());
+store.dispatch(getCourses());
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);

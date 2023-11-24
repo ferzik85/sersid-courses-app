@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { getAuthorsApiAsync } from '../../api/Authors/GetAuthors';
 import { addAuthorApiAsync } from '../../api/Authors/AddAuthor';
 import { deleteAuthorApiAsync } from '../../api/Authors/DeleteAuthor';
@@ -7,11 +6,8 @@ import { userTokenIsSet, getUserToken } from '../../localStorage/StorageAccess';
 
 export const getAuthors = () =>
 	async function saveAuthorsFromDbToStore(dispatch) {
-		if (userTokenIsSet()) {
-			const token = getUserToken();
-			const result = await getAuthorsApiAsync(token);
-			if (result.ok) dispatch(saveAuthorsAction(result.authors));
-		}
+		const result = await getAuthorsApiAsync();
+		if (result.ok) dispatch(saveAuthorsAction(result.authors));
 	};
 
 export const addAuthor = (name) =>

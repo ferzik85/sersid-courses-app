@@ -6,8 +6,6 @@ import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { validateEmail, validatePassword } from '../../utils/ValidateInput';
 import { putUser as addUserToLocalStorage, userTokenIsSet, getUser } from '../../localStorage/StorageAccess';
 import { loginUserAction } from '../../store/user/actions';
-import { getGourses } from '../../store/courses/thunk';
-import { getAuthors } from '../../store/authors/thunk';
 import { loginUserAsync } from '../../api/User/LoginUser';
 import { getMeAsync } from '../../api/User/GetMe';
 import styles from './Login.module.css';
@@ -19,20 +17,12 @@ function Login() {
 	const [password, setPassword] = useState(null);
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
-
 	const navigateToCourses = (useRedirect) => navigate('/courses', { replace: useRedirect });
-
 	const saveUserToStore = (user) => dispatch(loginUserAction(user));
-
-	const refreshStoreAsync = async (user) => {
-		saveUserToStore(user);
-		dispatch(getAuthors());
-		dispatch(getGourses());
-	};
 
 	useEffect(() => {
 		if (userTokenIsSet()) {
-			refreshStoreAsync(getUser());
+			saveUserToStore(getUser());
 			navigateToCourses(true);
 		}
 	}, []);
@@ -60,7 +50,7 @@ function Login() {
 			if (me.ok) {
 				const user = { ...userIsLoggedResponse.user, role: me.role };
 				addUserToLocalStorage(user);
-				await refreshStoreAsync(user);
+				saveUserToStore(getUser());
 				navigateToCourses(false);
 			}
 		}

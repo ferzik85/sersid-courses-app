@@ -1,11 +1,10 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function getCoursesApiAsync(token) {
+export async function getCoursesApiAsync() {
 	try {
 		const response = await fetch(`${backendUrl}/courses/all`, {
 			method: 'Get',
 			headers: {
-				Authorization: token,
 				'Content-Type': 'application/json',
 				accept: '*/*',
 			},

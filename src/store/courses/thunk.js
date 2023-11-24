@@ -5,13 +5,10 @@ import { updateCourseApiAsync } from '../../api/Courses/UpdateCourse';
 import { saveCoursesAction, addCourseAction, deleteCourseAction, updateCourseAction } from './actions';
 import { userTokenIsSet, getUserToken } from '../../localStorage/StorageAccess';
 
-export const getGourses = () =>
+export const getCourses = () =>
 	async function saveCoursesFromDbToStore(dispatch) {
-		if (userTokenIsSet()) {
-			const token = getUserToken();
-			const result = await getCoursesApiAsync(token);
-			dispatch(saveCoursesAction(result.courses));
-		}
+		const result = await getCoursesApiAsync();
+		if (result.ok) dispatch(saveCoursesAction(result.courses));
 	};
 
 export const addCourse = (course) =>
