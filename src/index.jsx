@@ -8,6 +8,7 @@ import Courses from './components/Courses/Courses';
 import CourseInfo from './components/CourseInfo/CourseInfo';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import { Layout } from './components/Layout';
+import { PrivateRoute } from './components/PrivateRoute';
 import App from './App';
 import store from './store';
 
@@ -23,8 +24,22 @@ root.render(
 					<Route path='registration' element={<Registration />} />
 					<Route path='courses' element={<App />}>
 						<Route path=':courseId' element={<CourseInfo />} />
-						<Route path='add' element={<CreateCourse />} />
-						<Route path='update/:courseId' element={<CreateCourse />} />
+						<Route
+							path='add'
+							element={
+								<PrivateRoute>
+									<CreateCourse />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='update/:courseId'
+							element={
+								<PrivateRoute>
+									<CreateCourse />
+								</PrivateRoute>
+							}
+						/>
 						<Route index element={<Courses />} />
 					</Route>
 					<Route path='*' element={<Navigate to='/login' />} />
