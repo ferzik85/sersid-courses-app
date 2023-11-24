@@ -3,27 +3,40 @@ import { addCourseApiAsync } from '../../api/Courses/AddCourse';
 import { deleteCourseApiAsync } from '../../api/Courses/DeleteCourse';
 import { updateCourseApiAsync } from '../../api/Courses/UpdateCourse';
 import { saveCoursesAction, addCourseAction, deleteCourseAction, updateCourseAction } from './actions';
+import { userTokenIsSet, getUserToken } from '../../localStorage/StorageAccess';
 
-export const getGourses = (token) =>
+export const getGourses = () =>
 	async function saveCoursesFromDbToStore(dispatch) {
-		const result = await getCoursesApiAsync(token);
-		dispatch(saveCoursesAction(result.courses));
+		if (userTokenIsSet) {
+			const token = getUserToken();
+			const result = await getCoursesApiAsync(token);
+			dispatch(saveCoursesAction(result.courses));
+		}
 	};
 
-export const addCourse = (token, course) =>
+export const addCourse = (course) =>
 	async function addCourseToDbAndStore(dispatch) {
-		const result = await addCourseApiAsync(token, course);
-		if (result.ok) dispatch(addCourseAction(result.course));
+		if (userTokenIsSet) {
+			const token = getUserToken();
+			const result = await addCourseApiAsync(token, course);
+			if (result.ok) dispatch(addCourseAction(result.course));
+		}
 	};
 
-export const deleteCourse = (token, id) =>
+export const deleteCourse = (id) =>
 	async function deleteCourseFromDbAndStore(dispatch) {
-		const result = await deleteCourseApiAsync(token, id);
-		if (result.ok) dispatch(deleteCourseAction(id));
+		if (userTokenIsSet) {
+			const token = getUserToken();
+			const result = await deleteCourseApiAsync(token, id);
+			if (result.ok) dispatch(deleteCourseAction(id));
+		}
 	};
 
-export const updateCourse = (token, course) =>
+export const updateCourse = (course) =>
 	async function updateCourseInDbAndStore(dispatch) {
-		const result = await updateCourseApiAsync(token, course);
-		if (result.ok) dispatch(updateCourseAction(result.course));
+		if (userTokenIsSet) {
+			const token = getUserToken();
+			const result = await updateCourseApiAsync(token, course);
+			if (result.ok) dispatch(updateCourseAction(result.course));
+		}
 	};

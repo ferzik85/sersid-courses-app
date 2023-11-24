@@ -26,8 +26,8 @@ function Login() {
 
 	const refreshStoreAsync = async (user) => {
 		saveUserToStore(user);
-		dispatch(getAuthors(user.token));
-		dispatch(getGourses(user.token));
+		dispatch(getAuthors());
+		dispatch(getGourses());
 	};
 
 	useEffect(() => {
