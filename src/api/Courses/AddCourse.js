@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function addCourseApiAsync(course, token) {
+export async function addCourseApiAsync(token, course) {
 	try {
 		const response = await fetch(`${backendUrl}/courses/add`, {
 			method: 'Post',
@@ -16,7 +16,7 @@ export async function addCourseApiAsync(course, token) {
 		const data = await response.json();
 		return {
 			ok: response.ok && data.successful,
-			course: data.result ?? null,
+			course: data.result,
 		};
 	} catch (error) {
 		// ignore

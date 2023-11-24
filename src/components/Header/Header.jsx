@@ -1,22 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearLocalStorage, userTokenIsSet } from '../../localStorage/StorageAccess';
-import { logoutUserAction } from '../../store/user/actions';
+import { userTokenIsSet } from '../../localStorage/StorageAccess';
+import { logoutUser } from '../../store/user/thunk';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo';
 import styles from './Header.module.css';
 
 function Header() {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const handleLogout = () => {
-		clearLocalStorage();
-		dispatch(logoutUserAction());
-		navigate('/login');
-	};
+	const dispatch = useDispatch();
+	const handleLogout = () => dispatch(logoutUser()).then(() => navigate('/login'));
 	const user = useSelector((state) => state.user.name);
-
 	return (
 		<div className={styles.header}>
 			<div className={styles.logo}>

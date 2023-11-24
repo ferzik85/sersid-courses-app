@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function addAuthorApiAsync(author, token) {
+export async function addAuthorApiAsync(token, author) {
 	try {
 		const response = await fetch(`${backendUrl}/authors/add`, {
 			method: 'Post',

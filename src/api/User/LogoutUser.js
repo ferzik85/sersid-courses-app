@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function loginUserAsync(token) {
+export async function logoutUserAsync(token) {
 	try {
 		const response = await fetch(`${backendUrl}/logout`, {
 			method: 'Delete',

@@ -7,7 +7,7 @@ import styles from './EmptyCourseList.module.css';
 function EmptyCourseList() {
 	const userRole = getUserRole();
 
-	const isAdminUser = userRole.toUpperCase() === 'ADMIN';
+	const isAdminUser = userRole?.toUpperCase() === 'ADMIN';
 
 	const newCourseElement = (
 		<Link to='add'>

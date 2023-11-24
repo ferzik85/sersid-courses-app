@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function deleteAuthorApiAsync(id, token) {
+export async function deleteAuthorApiAsync(token, id) {
 	try {
 		const response = await fetch(`${backendUrl}/authors/${id}`, {
 			method: 'Delete',

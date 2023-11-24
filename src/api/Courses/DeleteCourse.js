@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function deleteCourseApiAsync(id, token) {
+export async function deleteCourseApiAsync(token, id) {
 	try {
 		const response = await fetch(`${backendUrl}/courses/${id}`, {
 			method: 'Delete',

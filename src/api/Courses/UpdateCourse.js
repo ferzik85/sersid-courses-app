@@ -1,6 +1,6 @@
 import { backendUrl } from '../../const/AppConsts';
 
-export async function updateCourseApiAsync(course, token) {
+export async function updateCourseApiAsync(token, course) {
 	try {
 		const response = await fetch(`${backendUrl}/courses/${course.id}`, {
 			method: 'Put',
