@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { addAuthorAction, deleteAuthorAction } from '../../store/authors/actions';
-import { addCourseAction } from '../../store/courses/actions';
+import { addAuthor, deleteAuthor } from '../../store/authors/thunk';
+import { addCourse, updateCourse } from '../../store/courses/thunk';
+import { getCourse } from '../../utils/CoursesHelper';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { ButtonInput } from '../../common/ButtonInput';
@@ -15,7 +15,15 @@ import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
+	const params = useParams();
+	const courseId = params.courseId ?? null;
+	const isEditForm = courseId != null;
 	const authors = useSelector((state) => state.authors);
+	const courseToEdit = getCourse(
+		courseId,
+		useSelector((state) => state.courses)
+	);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(null);
@@ -24,17 +32,11 @@ function CreateCourse() {
 	const [titleIsInvalid, setTitleIsInvalid] = useState(false);
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
-	const [courseAuthors, setCourseAuthors] = useState([]);
+	const [courseAuthorIds, setCourseAuthorIds] = useState(courseToEdit?.authors ?? []);
 
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
 	const validateInputForCourseCreate = (value) => validateInput(value) && value.length > 1;
-
-	const handleCreateAuthor = (name) => dispatch(addAuthorAction({ name, id: uuidv4() }));
-
-	const deleteAuthor = (id) => dispatch(deleteAuthorAction(id));
-
-	const addCourse = (course) => dispatch(addCourseAction({ ...course, id: uuidv4() }));
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -53,22 +55,24 @@ function CreateCourse() {
 
 	const handleAddAuthorToCourse = (e, authorId) => {
 		e.preventDefault();
-		const authorWithTheSameIdAlreadyExists = courseAuthors.find((author) => author.id === authorId) != null;
+		const authorWithTheSameIdAlreadyExists = courseAuthorIds.find((courseAuthorId) => courseAuthorId === authorId) != null;
 		if (authorWithTheSameIdAlreadyExists) return;
 		const authorToAdd = authors.find((author) => author.id === authorId);
-		if (authorToAdd) setCourseAuthors([...courseAuthors, authorToAdd]);
+		if (authorToAdd) setCourseAuthorIds([...courseAuthorIds, authorToAdd.id]);
 	};
 
 	const handleRemoveAuthorFromCourse = (e, authorId) => {
 		e?.preventDefault();
-		setCourseAuthors([...courseAuthors.filter((author) => author.id !== authorId)]);
+		setCourseAuthorIds([...courseAuthorIds.filter((courseAuthorId) => courseAuthorId !== authorId)]);
 	};
 
-	const courseAuthorListIsEmpty = courseAuthors.length === 0;
+	const courseAuthorListIsEmpty = courseAuthorIds.length === 0;
+
+	const handleCreateAuthor = (name) => dispatch(addAuthor(name));
 
 	const handleDeleteAuthor = (e, authorId) => {
 		e.preventDefault();
-		deleteAuthor(authorId);
+		dispatch(deleteAuthor(authorId));
 		handleRemoveAuthorFromCourse(null, authorId);
 	};
 
@@ -81,19 +85,35 @@ function CreateCourse() {
 		setDescriptionIsInvalid(invalidDescription);
 		setDurationIsInvalid(!validateDuration(duration));
 		if (invalidTitle || invalidDescription || invalidDuration) return;
-		addCourse({
-			title,
-			description,
-			creationDate: getCurrentDate(),
-			duration: +duration,
-			authors: courseAuthors.map((author) => author.id),
-		});
+		if (!courseToEdit) {
+			dispatch(
+				addCourse({
+					title,
+					description,
+					creationDate: getCurrentDate(),
+					duration: +duration,
+					authors: [...courseAuthorIds],
+				})
+			);
+		} else {
+			dispatch(
+				updateCourse({
+					id: courseId,
+					title,
+					description,
+					creationDate: getCurrentDate(),
+					duration: +duration,
+					authors: [...courseAuthorIds],
+				})
+			);
+		}
+
 		navigate('/courses');
 	}
 
 	return (
 		<div className={styles.create}>
-			<h3 className={styles.createHeader}>Course Edit/Create Page</h3>
+			<h3 className={styles.createHeader}>{isEditForm ? 'Edit Course' : 'Create Course'}</h3>
 			<div className={styles.createBody}>
 				<form onSubmit={handleSubmit} id={formId} className={styles.createForm}>
 					<p className={styles.createMain}>Main Info</p>
@@ -133,16 +153,18 @@ function CreateCourse() {
 							{courseAuthorListIsEmpty ? (
 								<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
 							) : (
-								courseAuthors.map((author) => (
-									<AuthorItem
-										key={author.id}
-										id={author.id}
-										name={author.name}
-										onDeleteClick={handleRemoveAuthorFromCourse}
-										addIsDisabled
-										authorItemClass={styles.courseListItem}
-									/>
-								))
+								authors
+									.filter((author) => courseAuthorIds.includes(author.id))
+									.map((author) => (
+										<AuthorItem
+											key={author.id}
+											id={author.id}
+											name={author.name}
+											onDeleteClick={handleRemoveAuthorFromCourse}
+											addIsDisabled
+											authorItemClass={styles.courseListItem}
+										/>
+									))
 							)}
 						</div>
 					</div>

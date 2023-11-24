@@ -10,7 +10,7 @@ export async function addAuthorApiAsync(token, author) {
 				accept: '*/*',
 			},
 			body: JSON.stringify({
-				author,
+				name: author,
 			}),
 		});
 		const data = await response.json();

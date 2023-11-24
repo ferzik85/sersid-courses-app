@@ -6,7 +6,12 @@ export function combineCoursesWithAuthorNames(courses, authors) {
 	return coursesWithAuthors;
 }
 
-export function getCourse(id, courses, authors) {
-	const foundCourse = combineCoursesWithAuthorNames(courses, authors).find((course) => course.id === id) ?? null;
+export function getCourseWithAuthor(id, courses, authors) {
+	const foundCourseWithAuthor = combineCoursesWithAuthorNames(courses, authors).find((course) => course.id === id) ?? null;
+	return foundCourseWithAuthor;
+}
+
+export function getCourse(id, courses) {
+	const foundCourse = courses?.find((course) => course.id === id) ?? null;
 	return foundCourse;
 }

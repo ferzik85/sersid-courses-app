@@ -24,6 +24,7 @@ root.render(
 					<Route path='courses' element={<App />}>
 						<Route path=':courseId' element={<CourseInfo />} />
 						<Route path='add' element={<CreateCourse />} />
+						<Route path='update/:courseId' element={<CreateCourse />} />
 						<Route index element={<Courses />} />
 					</Route>
 					<Route path='*' element={<Navigate to='/login' />} />

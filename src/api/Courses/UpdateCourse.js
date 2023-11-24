@@ -9,9 +9,7 @@ export async function updateCourseApiAsync(token, course) {
 				'Content-Type': 'application/json',
 				accept: '*/*',
 			},
-			body: JSON.stringify({
-				course,
-			}),
+			body: JSON.stringify(course),
 		});
 		const data = await response.json();
 		return {

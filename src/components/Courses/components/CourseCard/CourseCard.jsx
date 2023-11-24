@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { deleteCourse } from '../../../../store/courses/thunk';
 import Button from '../../../../common/Button/Button';
@@ -13,9 +13,12 @@ import styles from './CourseCard.module.css';
 
 function CourseCard({ id, title, description, creationDate, duration, authors }) {
 	const buttonStyle = 'material-symbols-outlined';
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleDeleteCourse = () => dispatch(deleteCourse(id));
-	const handleEditCourse = () => {};
+	const handleEditCourse = () => {
+		navigate(`update/${id}`);
+	};
 
 	return (
 		<div className={styles.card}>
