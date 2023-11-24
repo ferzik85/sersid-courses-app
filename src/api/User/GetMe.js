@@ -1,4 +1,4 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
 export async function getMeAsync(token) {
 	try {

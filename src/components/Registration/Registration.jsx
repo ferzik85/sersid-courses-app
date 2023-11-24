@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { validateInput, validateEmail, validatePassword } from '../../utils/ValidateInput';
-import registerUserAsync from '../../api/RegisterUser';
+import { registerUserAsync } from '../../api/User/RegisterUser';
 
 import styles from './Registration.module.css';
 

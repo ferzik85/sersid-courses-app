@@ -9,8 +9,8 @@ import { getAuthorsAsync, getCoursesAsync } from '../../services';
 import { saveAuthorsAction } from '../../store/authors/actions';
 import { saveCoursesAction } from '../../store/courses/actions';
 import { loginUserAction } from '../../store/user/actions';
-import loginUserAsync from '../../api/LoginUser';
-import { getMeAsync } from '../../api/GetMe';
+import { loginUserAsync } from '../../api/User/LoginUser';
+import { getMeAsync } from '../../api/User/GetMe';
 import styles from './Login.module.css';
 
 function Login() {

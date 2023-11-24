@@ -1,8 +1,8 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
-async function getAuthorsApiAsync(token) {
+export async function getCoursesApiAsync(token) {
 	try {
-		const response = await fetch(`${backendUrl}/authors/all`, {
+		const response = await fetch(`${backendUrl}/courses/all`, {
 			method: 'Get',
 			headers: {
 				Authorization: token,
@@ -13,15 +13,13 @@ async function getAuthorsApiAsync(token) {
 		const data = await response.json();
 		return {
 			ok: response.ok && data.successful,
-			authors: data.result ?? [],
+			courses: data.result ?? [],
 		};
 	} catch (error) {
 		// ignore
 	}
 	return {
 		ok: false,
-		authors: [],
+		courses: [],
 	};
 }
-
-export default getAuthorsApiAsync;

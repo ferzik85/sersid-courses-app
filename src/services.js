@@ -1,5 +1,5 @@
-import getCoursesApiAsync from './api/GetCourses';
-import getAuthorsApiAsync from './api/GetAuthors';
+import { getCoursesApiAsync } from './api/Courses/GetCourses';
+import { getAuthorsApiAsync } from './api/Authors/GetAuthors';
 
 export async function getAuthorsAsync(token) {
 	const response = await getAuthorsApiAsync(token);
