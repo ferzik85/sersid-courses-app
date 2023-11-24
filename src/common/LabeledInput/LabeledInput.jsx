@@ -5,12 +5,12 @@ import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import styles from './LabeledInput.module.css';
 
-function LabeledInput({ name, onChange, isInvalid, inputClassName, isTextArea }) {
+function LabeledInput({ name, value, onChange, isInvalid, inputClassName, isTextArea }) {
 	const defaultClassNames = classnames(styles.labelInput, inputClassName);
 	const errorClassNames = classnames(styles.labelInput, inputClassName, styles.errorBorder);
 	const assignInputClasses = isInvalid ? errorClassNames : defaultClassNames;
-	const inputElement = <Input onChange={onChange} className={assignInputClasses} />;
-	const textAreaElement = <TextArea onChange={onChange} className={assignInputClasses} />;
+	const inputElement = <Input value={value} onChange={onChange} className={assignInputClasses} />;
+	const textAreaElement = <TextArea value={value} onChange={onChange} className={assignInputClasses} />;
 
 	return (
 		<label className={styles.label}>
@@ -26,6 +26,7 @@ export default LabeledInput;
 LabeledInput.defaultProps = {
 	inputClassName: null,
 	isTextArea: false,
+	value: '',
 };
 
 LabeledInput.propTypes = {
@@ -34,4 +35,5 @@ LabeledInput.propTypes = {
 	isInvalid: PropTypes.bool,
 	inputClassName: PropTypes.string,
 	isTextArea: PropTypes.bool,
+	value: PropTypes.string,
 };

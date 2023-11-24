@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
@@ -6,11 +6,7 @@ import Button from '../Button/Button';
 import styles from './ButtonInput.module.css';
 
 export function ButtonInput({ labelName, buttonName, onClick, validateInput, inputClassName }) {
-	const inputRef = useRef(null);
-	const clearInput = () => {
-		inputRef.current.value = '';
-	};
-	const [value, setValue] = useState(null);
+	const [value, setValue] = useState('');
 	const [valueIsInvalid, setValueIsInvalid] = useState(false);
 	const handleValueChange = (val) => {
 		setValue(val);
@@ -22,8 +18,7 @@ export function ButtonInput({ labelName, buttonName, onClick, validateInput, inp
 		const invalidAuthorName = !validateInput(value);
 		setValueIsInvalid(invalidAuthorName);
 		if (valueIsInvalid) return;
-		clearInput();
-		setValue(null);
+		setValue('');
 		onClick(value);
 	};
 
@@ -34,7 +29,7 @@ export function ButtonInput({ labelName, buttonName, onClick, validateInput, inp
 		<label className={styles.label}>
 			{labelName}
 			<div>
-				<Input inputRef={inputRef} onChange={handleValueChange} className={assignInputClasses()} />
+				<Input value={value} onChange={handleValueChange} className={assignInputClasses()} />
 				<Button label={buttonName} className={styles.labelButton} onClick={handleClick} />
 			</div>
 			{valueIsInvalid && <p className={styles.error}>{labelName} is required.</p>}
