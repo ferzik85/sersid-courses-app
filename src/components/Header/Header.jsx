@@ -5,6 +5,7 @@ import { clearLocalStorage, userTokenIsSet } from '../../localStorage/StorageAcc
 import { logoutUserAction } from '../../store/user/actions';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo';
+import { getUser } from '../../store/user/selectors';
 import styles from './Header.module.css';
 
 function Header() {
@@ -15,7 +16,7 @@ function Header() {
 		dispatch(logoutUserAction());
 		navigate('/login');
 	};
-	const user = useSelector((state) => state.user.name);
+	const user = useSelector(getUser);
 
 	return (
 		<div className={styles.header}>

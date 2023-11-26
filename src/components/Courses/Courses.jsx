@@ -7,13 +7,15 @@ import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
 import { combineCoursesWithAuthorNames } from '../../utils/CoursesHelper';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
+import { getAuthors } from '../../store/authors/selectors';
+import { getCourses } from '../../store/courses/selectors';
 import styles from './Courses.module.css';
 
 function Courses() {
 	const [searchString, setSearchString] = useState(null);
 	const handleSearchClick = useCallback((searchKey) => setSearchString(searchKey), [setSearchString]);
-	const authors = useSelector((state) => state.authors);
-	const courses = useSelector((state) => state.courses);
+	const authors = useSelector(getAuthors);
+	const courses = useSelector(getCourses);
 	const coursesWithAuthorNames = combineCoursesWithAuthorNames(courses, authors);
 	const noCourses = coursesWithAuthorNames.length === 0;
 	const filteredCourses = searchString ? searchCourses(searchString, coursesWithAuthorNames) : coursesWithAuthorNames;

@@ -6,12 +6,14 @@ import Duration from '../../common/Duration/Duration';
 import formatDate from '../../utils/FormatDate';
 import formatAuthors from '../../utils/FormatAuthors';
 import { getCourse } from '../../utils/CoursesHelper';
+import { getAuthors } from '../../store/authors/selectors';
+import { getCourses } from '../../store/courses/selectors';
 import styles from './CourseInfo.module.css';
 
 function CourseInfo() {
 	const params = useParams();
-	const authors = useSelector((state) => state.authors);
-	const courses = useSelector((state) => state.courses);
+	const authors = useSelector(getAuthors);
+	const courses = useSelector(getCourses);
 	const foundCourse = getCourse(params.courseId, courses, authors);
 	const courseIsFound = foundCourse != null;
 

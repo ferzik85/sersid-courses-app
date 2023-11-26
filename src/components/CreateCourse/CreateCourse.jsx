@@ -11,11 +11,12 @@ import { DurationInput } from '../../common/DurationInput';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
+import { getAuthors } from '../../store/authors/selectors';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
-	const authors = useSelector((state) => state.authors);
+	const authors = useSelector(getAuthors);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(null);
