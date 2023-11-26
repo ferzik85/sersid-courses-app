@@ -15,7 +15,7 @@ function loginUser(state, user) {
 	return {
 		...state,
 		isAuth: true,
-		...user.payload,
+		...user,
 	};
 }
 

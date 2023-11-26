@@ -13,8 +13,8 @@ import styles from './Login.module.css';
 function Login() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [email, setEmail] = useState(null);
-	const [password, setPassword] = useState(null);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 	const navigateToCourses = (useRedirect) => navigate('/courses', { replace: useRedirect });
@@ -61,8 +61,8 @@ function Login() {
 			<b className={styles.loginHeader}>Login</b>
 			<div className={styles.loginBody}>
 				<form onSubmit={handleSubmit} className={styles.loginForm}>
-					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
-					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
+					<LabeledInput name='Email' value={email} isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.loginInput} />
+					<LabeledInput name='Password' value={password} isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.loginInput} />
 					<Button label='LOGIN' type='submit' className={styles.loginButton} />
 				</form>
 				<div className={styles.loginHelp}>
