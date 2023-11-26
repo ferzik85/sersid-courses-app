@@ -12,7 +12,7 @@ export const authorsReducer = (state = authorsInitialState, action) => {
 			return [...state, action.payload];
 
 		case DELETE_AUTHOR:
-			return state.filter((course) => course.id !== action.payload);
+			return state.filter((author) => author.id !== action.payload);
 
 		default:
 			return state;

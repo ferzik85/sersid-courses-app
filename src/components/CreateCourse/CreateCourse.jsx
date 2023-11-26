@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAuthor, deleteAuthor } from '../../store/authors/thunk';
 import { addCourse, updateCourse } from '../../store/courses/thunk';
-import { getCourse } from '../../utils/CoursesHelper';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { ButtonInput } from '../../common/ButtonInput';
@@ -11,6 +10,8 @@ import { DurationInput } from '../../common/DurationInput';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
+import { getAuthors } from '../../store/authors/selectors';
+import { getCourse } from '../../store/courses/selectors';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
@@ -20,11 +21,8 @@ function CreateCourse() {
 	const params = useParams();
 	const courseId = params.courseId ?? null;
 	const isAddForm = courseId == null;
-	const authors = useSelector((state) => state.authors);
-	const courseToEdit = getCourse(
-		courseId,
-		useSelector((state) => state.courses)
-	);
+	const authors = useSelector(getAuthors);
+	const courseToEdit = useSelector((state) => getCourse(state, courseId));
 	const [title, setTitle] = useState(courseToEdit?.title ?? '');
 	const [description, setDescription] = useState(courseToEdit?.description ?? '');
 	const [duration, setDuration] = useState(courseToEdit?.duration ?? '');
