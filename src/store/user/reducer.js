@@ -1,33 +1,31 @@
 /* eslint-disable default-param-last */
 import { LOGIN_USER, LOGOUT_USER } from './types';
 
-function createUser(isAuth, name, email, token, role) {
+export const userInitialState = {
+	isAuth: false,
+	name: '',
+	email: '',
+	token: '',
+	role: '',
+};
+
+const logoutUser = userInitialState;
+
+function loginUser(state, user) {
 	return {
-		isAuth,
-		name,
-		email,
-		token,
-		role,
+		...state,
+		isAuth: true,
+		...user,
 	};
 }
-
-function logoutUser() {
-	return createUser(false, '', '', '', '');
-}
-
-function loginUser({ name, email, token, role }) {
-	return createUser(true, name, email, token, role);
-}
-
-export const userInitialState = logoutUser();
 
 export const userReducer = (state = userInitialState, action) => {
 	switch (action.type) {
 		case LOGIN_USER:
-			return loginUser(action.payload);
+			return loginUser(state, action.payload);
 
 		case LOGOUT_USER:
-			return logoutUser();
+			return logoutUser;
 
 		default:
 			return state;

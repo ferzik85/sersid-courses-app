@@ -9,9 +9,7 @@ import validateDuration from '../../utils/ValidateDuration';
 export function DurationInput({ name, duration, onChange, isInvalid, inputClassName }) {
 	const handleValueChange = (value) => {
 		let val = value;
-		if (!validateDuration(value)) {
-			val = '';
-		}
+		if (!validateDuration(value)) val = '';
 		onChange(val);
 	};
 

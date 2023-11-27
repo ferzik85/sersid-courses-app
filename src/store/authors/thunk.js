@@ -23,7 +23,7 @@ export const deleteAuthor = (id) =>
 	async function deleteAuthorFromDbAndStore(dispatch) {
 		if (userTokenIsSet()) {
 			const token = getUserToken();
-			const result = await deleteAuthorApiAsync(token, id);
-			if (result) dispatch(deleteAuthorAction(id));
+			const ok = await deleteAuthorApiAsync(token, id);
+			if (ok) dispatch(deleteAuthorAction(id));
 		}
 	};

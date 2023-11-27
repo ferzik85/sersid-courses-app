@@ -16,10 +16,7 @@ function CourseCard({ id, title, description, creationDate, duration, authors })
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleDeleteCourse = () => dispatch(deleteCourse(id));
-	const handleEditCourse = () => {
-		navigate(`update/${id}`);
-	};
-
+	const handleEditCourse = () => navigate(`update/${id}`);
 	return (
 		<div className={styles.card}>
 			<div className={styles.cardLeft}>

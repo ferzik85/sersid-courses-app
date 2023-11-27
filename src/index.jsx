@@ -6,7 +6,7 @@ import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
 import Courses from './components/Courses/Courses';
 import CourseInfo from './components/CourseInfo/CourseInfo';
-import CreateCourse from './components/CreateCourse/CreateCourse';
+import CourseForm from './components/CourseForm/CourseForm';
 import { Layout } from './components/Layout';
 import { PrivateRoute } from './components/PrivateRoute';
 import { getCourses } from './store/courses/thunk';
@@ -33,7 +33,7 @@ root.render(
 							path='add'
 							element={
 								<PrivateRoute>
-									<CreateCourse />
+									<CourseForm />
 								</PrivateRoute>
 							}
 						/>
@@ -41,7 +41,7 @@ root.render(
 							path='update/:courseId'
 							element={
 								<PrivateRoute>
-									<CreateCourse />
+									<CourseForm />
 								</PrivateRoute>
 							}
 						/>

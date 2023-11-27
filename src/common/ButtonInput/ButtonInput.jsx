@@ -18,8 +18,8 @@ export function ButtonInput({ labelName, buttonName, onClick, validateInput, inp
 		const invalidAuthorName = !validateInput(value);
 		setValueIsInvalid(invalidAuthorName);
 		if (valueIsInvalid) return;
-		setValue('');
 		onClick(value);
+		setValue('');
 	};
 
 	const assignInputClasses = () =>

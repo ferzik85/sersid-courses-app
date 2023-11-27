@@ -5,14 +5,12 @@ import Button from '../../common/Button/Button';
 import Duration from '../../common/Duration/Duration';
 import formatDate from '../../utils/FormatDate';
 import formatAuthors from '../../utils/FormatAuthors';
-import { getCourseWithAuthor } from '../../utils/CoursesHelper';
+import { getCourseWithAuthorName } from '../../store/courses/selectors';
 import styles from './CourseInfo.module.css';
 
 function CourseInfo() {
 	const params = useParams();
-	const authors = useSelector((state) => state.authors);
-	const courses = useSelector((state) => state.courses);
-	const foundCourse = getCourseWithAuthor(params.courseId, courses, authors);
+	const foundCourse = useSelector((state) => getCourseWithAuthorName(state, params.courseId));
 	const courseIsFound = foundCourse != null;
 
 	const courseElement = (course) => (

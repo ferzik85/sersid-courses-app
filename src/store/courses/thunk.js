@@ -24,8 +24,8 @@ export const deleteCourse = (id) =>
 	async function deleteCourseFromDbAndStore(dispatch) {
 		if (userTokenIsSet()) {
 			const token = getUserToken();
-			const result = await deleteCourseApiAsync(token, id);
-			if (result) dispatch(deleteCourseAction(id));
+			const ok = await deleteCourseApiAsync(token, id);
+			if (ok) dispatch(deleteCourseAction(id));
 		}
 	};
 
