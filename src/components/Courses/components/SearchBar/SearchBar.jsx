@@ -5,20 +5,19 @@ import Input from '../../../../common/Input/Input';
 import styles from './SearchBar.module.css';
 
 function SearchBar({ onSearchClick }) {
-	const [searchValue, setSearchValue] = useState(null);
+	const [value, setValue] = useState('');
 
 	const handleChange = useCallback(
-		(value) => {
-			setSearchValue(value);
-			if (!value) onSearchClick(null);
+		(val) => {
+			setValue(val);
+			if (!val) onSearchClick(null);
 		},
-		[setSearchValue]
+		[setValue]
 	);
-
 	return (
 		<div className={styles.searchBar}>
-			<Input onChange={handleChange} className={styles.searchInput} />
-			<Button label='SEARCH' onClick={() => onSearchClick(searchValue)} />
+			<Input value={value} onChange={handleChange} className={styles.searchInput} />
+			<Button label='SEARCH' onClick={() => onSearchClick(value)} />
 		</div>
 	);
 }

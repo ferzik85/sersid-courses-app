@@ -14,7 +14,7 @@ import { getAuthors } from '../../store/authors/selectors';
 import { getCourse } from '../../store/courses/selectors';
 import styles from './CourseForm.module.css';
 
-function CreateCourse() {
+function CourseForm() {
 	const formId = 'courseCreateOrEditForm';
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -168,4 +168,4 @@ function CreateCourse() {
 	);
 }
 
-export default CreateCourse;
+export default CourseForm;
