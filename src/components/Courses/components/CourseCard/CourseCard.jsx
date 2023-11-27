@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import { deleteCourseAction } from '../../../../store/courses/actions';
 import Button from '../../../../common/Button/Button';
 import formatDate from '../../../../utils/FormatDate';
 import formatDuration from '../../../../utils/FormatDuration';
@@ -10,6 +12,9 @@ import styles from './CourseCard.module.css';
 
 function CourseCard({ id, title, description, creationDate, duration, authors }) {
 	const buttonStyle = 'material-symbols-outlined';
+	const dispatch = useDispatch();
+	const handleDeleteCourse = () => dispatch(deleteCourseAction(id));
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.cardLeft}>
@@ -35,7 +40,7 @@ function CourseCard({ id, title, description, creationDate, duration, authors })
 					<Link to={id}>
 						<Button label='SHOW COURSE' className={styles.cardShowButton} />
 					</Link>
-					<Button label='delete' className={classnames(buttonStyle, styles.cardDeleteButton)} />
+					<Button label='delete' onClick={handleDeleteCourse} className={classnames(buttonStyle, styles.cardDeleteButton)} />
 					<Button label='edit' className={classnames(buttonStyle, styles.cardEditButton)} />
 				</p>
 			</div>

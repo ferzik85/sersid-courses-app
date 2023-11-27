@@ -1,18 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import Duration from '../../common/Duration/Duration';
 import formatDate from '../../utils/FormatDate';
 import formatAuthors from '../../utils/FormatAuthors';
-import { getCourse } from '../../utils/CoursesCrud';
+import { getCourseWithAuthorName } from '../../store/courses/selectors';
 import styles from './CourseInfo.module.css';
 
 function CourseInfo() {
 	const params = useParams();
-
-	const foundCourse = getCourse(params.courseId);
-
-	const courseIsFound = () => foundCourse != null;
+	const foundCourse = useSelector((state) => getCourseWithAuthorName(state, params.courseId));
+	const courseIsFound = foundCourse != null;
 
 	const courseElement = (course) => (
 		<>
@@ -46,7 +45,7 @@ function CourseInfo() {
 
 	return (
 		<div className={styles.courseInfo}>
-			{courseIsFound() ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
+			{courseIsFound ? courseElement(foundCourse) : <div className={styles.courseIsNotFound}>Course is not found</div>}
 			<div>
 				<Link to='/courses'>
 					<Button label='BACK' className={styles.courseDescriptionButton} />

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { addAuthorAction, deleteAuthorAction } from '../../store/authors/actions';
+import { addCourseAction } from '../../store/courses/actions';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { ButtonInput } from '../../common/ButtonInput';
@@ -7,25 +11,31 @@ import { DurationInput } from '../../common/DurationInput';
 import { validateInput } from '../../utils/ValidateInput';
 import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
-import { addCourse } from '../../utils/CoursesCrud';
-import { getAuthors, addAuthor, deleteAuthor } from '../../utils/AuthorsCrud';
+import { getAuthors } from '../../store/authors/selectors';
 import styles from './CreateCourse.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
+	const authors = useSelector(getAuthors);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [duration, setDuration] = useState(null);
 	const [titleIsInvalid, setTitleIsInvalid] = useState(false);
 	const [descriptionIsInvalid, setDescriptionIsInvalid] = useState(false);
 	const [durationIsInvalid, setDurationIsInvalid] = useState(false);
-	const [authors, setAuthors] = useState(getAuthors());
 	const [courseAuthors, setCourseAuthors] = useState([]);
 
 	const getCurrentDate = () => new Date().toJSON().slice(0, 10).split('-').reverse().join('/');
 
 	const validateInputForCourseCreate = (value) => validateInput(value) && value.length > 1;
+
+	const handleCreateAuthor = (name) => dispatch(addAuthorAction({ name, id: uuidv4() }));
+
+	const deleteAuthor = (id) => dispatch(deleteAuthorAction(id));
+
+	const addCourse = (course) => dispatch(addCourseAction({ ...course, id: uuidv4() }));
 
 	const handleTitleChange = (value) => {
 		setTitle(value);
@@ -42,13 +52,6 @@ function CreateCourse() {
 		setDurationIsInvalid(false);
 	};
 
-	const handleCreateAuthor = (name) => {
-		addAuthor({
-			name,
-		});
-		setAuthors([...getAuthors()]);
-	};
-
 	const handleAddAuthorToCourse = (e, authorId) => {
 		e.preventDefault();
 		const authorWithTheSameIdAlreadyExists = courseAuthors.find((author) => author.id === authorId) != null;
@@ -62,12 +65,11 @@ function CreateCourse() {
 		setCourseAuthors([...courseAuthors.filter((author) => author.id !== authorId)]);
 	};
 
-	const courseAuthorListIsEmpty = () => courseAuthors.length === 0;
+	const courseAuthorListIsEmpty = courseAuthors.length === 0;
 
 	const handleDeleteAuthor = (e, authorId) => {
 		e.preventDefault();
 		deleteAuthor(authorId);
-		setAuthors([...getAuthors()]);
 		handleRemoveAuthorFromCourse(null, authorId);
 	};
 
@@ -129,7 +131,7 @@ function CreateCourse() {
 						</div>
 						<div className={styles.courseAuthorsPanel}>
 							<p className={styles.courseAuthorsPanelTitle}>Course Authors</p>
-							{courseAuthorListIsEmpty() ? (
+							{courseAuthorListIsEmpty ? (
 								<p className={styles.courseAuthorsPanelEmptyList}>Author list is empty</p>
 							) : (
 								courseAuthors.map((author) => (

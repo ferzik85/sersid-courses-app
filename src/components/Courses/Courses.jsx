@@ -1,19 +1,20 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCourses } from '../../utils/CoursesCrud';
 import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
+import { getCoursesWithAuthorNames } from '../../store/courses/selectors';
 import styles from './Courses.module.css';
 
 function Courses() {
-	const [courseList, setCourses] = useState(getCourses());
-
-	const courseListIsEmpty = () => getCourses().length === 0;
-
-	const handleSearchClick = useCallback((searchString) => setCourses(searchCourses(searchString, courseList)), [setCourses]);
+	const [searchString, setSearchString] = useState(null);
+	const handleSearchClick = useCallback((searchKey) => setSearchString(searchKey), [setSearchString]);
+	const coursesWithAuthorNames = useSelector(getCoursesWithAuthorNames);
+	const noCourses = coursesWithAuthorNames.length === 0;
+	const filteredCourses = searchString ? searchCourses(searchString, coursesWithAuthorNames) : coursesWithAuthorNames;
 
 	const courseListElement = (
 		<>
@@ -23,7 +24,7 @@ function Courses() {
 					<Button label='ADD NEW COURSE' />
 				</Link>
 			</div>
-			{courseList.map((course) => (
+			{filteredCourses.map((course) => (
 				<CourseCard
 					key={course.id}
 					id={course.id}
@@ -37,7 +38,7 @@ function Courses() {
 		</>
 	);
 
-	const renderCourses = () => (courseListIsEmpty() ? <EmptyCourseList /> : courseListElement);
+	const renderCourses = () => (noCourses ? <EmptyCourseList /> : courseListElement);
 
 	return <div className={styles.courses}>{renderCourses()}</div>;
 }
