@@ -12,7 +12,7 @@ import validateDuration from '../../utils/ValidateDuration';
 import AuthorItem from './components/AuthorItem/AuthorItem';
 import { getAuthors } from '../../store/authors/selectors';
 import { getCourse } from '../../store/courses/selectors';
-import styles from './CreateCourse.module.css';
+import styles from './CourseForm.module.css';
 
 function CreateCourse() {
 	const formId = 'courseCreateOrEditForm';
