@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { TestProvider } from '../../../../../test';
-import formatDuration from '../../../../../utils/FormatDuration';
 import CourseCard from '../CourseCard';
 
 describe('CourseCard tests', () => {
@@ -15,6 +14,7 @@ describe('CourseCard tests', () => {
 				<CourseCard title={expectedTitle} id='' description='' creationDate='' duration={0} authors={[]} />
 			</TestProvider>
 		);
+
 		expect(screen.queryByText(expectedTitle)).toBeInTheDocument();
 	});
 
@@ -25,18 +25,20 @@ describe('CourseCard tests', () => {
 				<CourseCard description={expectedDescription} id='' title='' creationDate='' duration={0} authors={[]} />
 			</TestProvider>
 		);
+
 		expect(screen.queryByText(expectedDescription)).toBeInTheDocument();
 	});
 
 	test('CourseCard should display creation date in the correct format', () => {
-		const expectedCreationDate = '24/11/2023';
-		const expectedShownCreationDate = '24.11.2023';
+		const creationDate = '24/11/2023';
+		const expectedCreationDate = '24.11.2023';
 		render(
 			<TestProvider>
-				<CourseCard creationDate={expectedCreationDate} id='' description='' title='' duration={0} authors={[]} />
+				<CourseCard creationDate={creationDate} id='' description='' title='' duration={0} authors={[]} />
 			</TestProvider>
 		);
-		expect(screen.queryByText(expectedShownCreationDate)).toBeInTheDocument();
+
+		expect(screen.queryByText(expectedCreationDate)).toBeInTheDocument();
 	});
 
 	test('CourseCard should display authors list', () => {
@@ -47,17 +49,19 @@ describe('CourseCard tests', () => {
 				<CourseCard authors={authorsList} id='' description='' title='' creationDate='' duration={0} />
 			</TestProvider>
 		);
+
 		expect(screen.queryByText(expectedAuthorsList)).toBeInTheDocument();
 	});
 
 	test('CourseCard should display duration in the correct format', () => {
 		const duration = 120;
-		const expectedDuration = formatDuration(duration);
+		const expectedDuration = '02:00 hours';
 		render(
 			<TestProvider>
 				<CourseCard duration={duration} id='' description='' title='' creationDate='' authors={[]} />
 			</TestProvider>
 		);
+
 		expect(screen.queryByText(expectedDuration)).toBeInTheDocument();
 	});
 });

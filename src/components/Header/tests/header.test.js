@@ -20,6 +20,7 @@ describe('Header tests', () => {
 				<Header />
 			</TestProvider>
 		);
+
 		expect(screen.queryByAltText('epam logo')).toBeInTheDocument();
 		expect(screen.queryByText(expectedUser.name)).toBeInTheDocument();
 	});

@@ -15,21 +15,20 @@ jest.mock('../../../localStorage/StorageAccess', () => ({
 }));
 
 describe('Courses tests', () => {
-	test('Courses should display amount of CourseCard equal to number of courses', () => {
-		const expectedUser = { name: 'user-name' };
+	test('Courses should display amount of CourseCards equal to number of courses', () => {
 		const { container } = render(
-			<TestProvider user={expectedUser} authors={authors} courses={courses}>
+			<TestProvider authors={authors} courses={courses}>
 				<Courses />
 			</TestProvider>
 		);
+
 		expect(container.getElementsByClassName('card').length).toBe(courses.length);
 	});
 
 	test('CourseForm should be shown after a click on the "Add new course" button', () => {
 		isAdminUser.mockImplementation(() => true);
-		const expectedUser = { name: 'user-name' };
 		render(
-			<TestProvider user={expectedUser} authors={authors} courses={courses} initialEntries={['/courses']}>
+			<TestProvider initialEntries={['/courses']}>
 				<Routes>
 					<Route path='/courses' element={<Courses />} />
 					<Route
@@ -43,7 +42,6 @@ describe('Courses tests', () => {
 				</Routes>
 			</TestProvider>
 		);
-
 		const linkToAddNewCourse = screen.getByText('ADD NEW COURSE').parentElement;
 		click(linkToAddNewCourse);
 

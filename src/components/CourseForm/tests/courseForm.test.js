@@ -44,6 +44,7 @@ describe('CourseForm tests', () => {
 	test('CourseForm "Create author" button click should call dispatch', () => {
 		const createAuthorButton = screen.getByText('CREATE AUTHOR');
 		click(createAuthorButton);
+
 		const addAuthorThunkFunction = mockDispatchFn.mock.calls[0][0].name;
 		expect(addAuthorThunkFunction).toBe('addAuthorToDbAndStore');
 	});
