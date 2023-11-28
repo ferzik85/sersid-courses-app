@@ -98,32 +98,32 @@ function CourseForm() {
 	}
 
 	return (
-		<div className={styles.create}>
-			<h3 className={styles.createHeader}>{isAddForm ? 'Create Course' : 'Edit Course'}</h3>
-			<div className={styles.createBody}>
-				<form onSubmit={handleSubmitCourse} id={formId} className={styles.createForm}>
-					<p className={styles.createMain}>Main Info</p>
-					<LabeledInput name='Title' value={title} isInvalid={titleIsInvalid} onChange={handleTitleChange} inputClassName={styles.createTitle} />
+		<div className={styles.courseForm}>
+			<h3 className={styles.courseFormHeader}>{isAddForm ? 'Create Course' : 'Edit Course'}</h3>
+			<div className={styles.courseFormBody}>
+				<form onSubmit={handleSubmitCourse} id={formId} className={styles.submitForm}>
+					<p className={styles.courseFormMain}>Main Info</p>
+					<LabeledInput name='Title' value={title} isInvalid={titleIsInvalid} onChange={handleTitleChange} inputClassName={styles.courseFormTitle} />
 					<LabeledInput
 						name='Description'
 						value={description}
 						isInvalid={descriptionIsInvalid}
 						onChange={handleDescriptionChange}
-						inputClassName={styles.createDescription}
+						inputClassName={styles.courseFormDescription}
 						isTextArea
 					/>
-					<p className={styles.createMain}>Duration</p>
+					<p className={styles.courseFormMain}>Duration</p>
 					<DurationInput
 						name='Duration'
 						value={duration}
 						duration={duration}
 						onChange={handleDurationChange}
 						isInvalid={durationIsInvalid}
-						inputClassName={styles.createDuration}
+						inputClassName={styles.courseFormDuration}
 					/>
 					<div className={styles.createAuthorsPanel}>
 						<div className={styles.addAuthorsPanel}>
-							<p className={styles.createMain}>Authors</p>
+							<p className={styles.courseFormMain}>Authors</p>
 							<ButtonInput
 								labelName='Author Name'
 								buttonName='CREATE AUTHOR'
@@ -131,7 +131,7 @@ function CourseForm() {
 								validateInput={validateInputForCourseForm}
 								inputClassName={styles.createAuthor}
 							/>
-							<p className={styles.createMain}>Authors List</p>
+							<p className={styles.courseFormMain}>Authors List</p>
 							{authors.map((author) => (
 								<AuthorItem key={author.id} id={author.id} name={author.name} onAddClick={handleAddAuthorToCourse} onDeleteClick={handleDeleteAuthor} />
 							))}
@@ -158,7 +158,7 @@ function CourseForm() {
 					</div>
 				</form>
 			</div>
-			<div className={styles.createFooter}>
+			<div className={styles.courseFormFooter}>
 				<Button label='CREATE COURSE' type='submit' formName={formId} className={styles.createButton} />
 				<Link to='/courses'>
 					<Button label='CANCEL' className={styles.cancelButton} />
