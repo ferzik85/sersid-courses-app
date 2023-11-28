@@ -2,10 +2,13 @@
 /* eslint-disable react/jsx-filename-extension */
 import '@testing-library/jest-dom';
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { courses, authors, TestProvider, click } from '../../../test';
 import { isAdminUser } from '../../../localStorage/StorageAccess';
 import Courses from '../Courses';
+import CourseForm from '../../CourseForm/CourseForm';
+import { PrivateRoute } from '../../PrivateRoute';
 
 jest.mock('../../../localStorage/StorageAccess', () => ({
 	isAdminUser: jest.fn(),
@@ -26,11 +29,24 @@ describe('Courses tests', () => {
 		isAdminUser.mockImplementation(() => true);
 		const expectedUser = { name: 'user-name' };
 		render(
-			<TestProvider user={expectedUser} authors={authors} courses={courses}>
-				<Courses />
+			<TestProvider user={expectedUser} authors={authors} courses={courses} initialEntries={['/courses']}>
+				<Routes>
+					<Route path='/courses' element={<Courses />} />
+					<Route
+						path='/courses/add'
+						element={
+							<PrivateRoute>
+								<CourseForm />
+							</PrivateRoute>
+						}
+					/>
+				</Routes>
 			</TestProvider>
 		);
 
-		click(screen.getByText('ADD NEW COURSE'));
+		const linkToAddNewCourse = screen.getByText('ADD NEW COURSE').parentElement;
+		click(linkToAddNewCourse);
+
+		expect(screen.getByText('Create Course').parentElement.className).toMatch(/courseForm/);
 	});
 });

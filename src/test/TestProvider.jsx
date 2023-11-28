@@ -5,11 +5,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import rootReducer from '../store/rootReducer';
 
-export function TestProvider({ children, user, courses, authors }) {
+export function TestProvider({ children, user, courses, authors, initialEntries = ['/'] }) {
 	const store = configureStore({ reducer: rootReducer, preloadedState: { user, courses, authors } });
 	return (
 		<Provider store={store}>
-			<MemoryRouter>{children}</MemoryRouter>
+			<MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
 		</Provider>
 	);
 }
