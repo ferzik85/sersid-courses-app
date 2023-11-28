@@ -1,11 +1,11 @@
-.create {
+.courseForm {
   display: flex;
   flex-direction: column;
   width: 80%;
   margin: auto;
 }
 
-.createHeader {
+.courseFormHeader {
   margin: auto;
   margin-top: 20px;
   font-size: 32px;
@@ -14,7 +14,7 @@
   width: 1104px;
 }
 
-.createBody {
+.courseFormBody {
   width: 1104px;
   min-height: 825px;
   display: flex;
@@ -26,32 +26,32 @@
   font-size: 16px;
 }
 
-.createMain {
+.courseFormMain {
   font-size: 24px;
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.createForm {
+.submitForm {
   margin: auto;
   width: 944px;
   margin-top: 0;
 }
 
-.createTitle {
+.courseFormTitle {
   width: 944px;
 }
 
-.createDescription {
+.courseFormDescription {
   height: 100px;
   resize: none;
   padding-top: 15px;
   width: 944px;
 }
 
-.createDuration,
-.createAuthor {
+.courseFormDuration,
+.courseFormAuthor {
   width: 400px;
 }
 
@@ -91,7 +91,7 @@
   max-width: 200px;
 }
 
-.createFooter {
+.courseFormFooter {
   margin: auto;
   margin-top: 20px;
   width: 1104px;
