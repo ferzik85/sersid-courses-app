@@ -1,11 +1,10 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
-async function getAuthorsApiAsync(token) {
+export async function getAuthorsApiAsync() {
 	try {
 		const response = await fetch(`${backendUrl}/authors/all`, {
 			method: 'Get',
 			headers: {
-				Authorization: token,
 				'Content-Type': 'application/json',
 				accept: '*/*',
 			},
@@ -23,5 +22,3 @@ async function getAuthorsApiAsync(token) {
 		authors: [],
 	};
 }
-
-export default getAuthorsApiAsync;

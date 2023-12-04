@@ -5,6 +5,7 @@ import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
+import { isAdminUser } from '../../localStorage/StorageAccess';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import { getCoursesWithAuthorNames } from '../../store/courses/selectors';
 import styles from './Courses.module.css';
@@ -20,9 +21,11 @@ function Courses() {
 		<>
 			<div className={styles.header}>
 				<SearchBar onSearchClick={handleSearchClick} />
-				<Link to='add'>
-					<Button label='ADD NEW COURSE' />
-				</Link>
+				{isAdminUser() ? (
+					<Link to='add'>
+						<Button label='ADD NEW COURSE' />
+					</Link>
+				) : null}
 			</div>
 			{filteredCourses.map((course) => (
 				<CourseCard

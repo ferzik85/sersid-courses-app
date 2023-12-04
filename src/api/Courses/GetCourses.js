@@ -1,11 +1,10 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
-async function getCoursesApiAsync(token) {
+export async function getCoursesApiAsync() {
 	try {
 		const response = await fetch(`${backendUrl}/courses/all`, {
 			method: 'Get',
 			headers: {
-				Authorization: token,
 				'Content-Type': 'application/json',
 				accept: '*/*',
 			},
@@ -23,5 +22,3 @@ async function getCoursesApiAsync(token) {
 		courses: [],
 	};
 }
-
-export default getCoursesApiAsync;

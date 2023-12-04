@@ -1,6 +1,6 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
-async function registerUserAsync(name, email, password) {
+export async function registerUserAsync(name, email, password) {
 	try {
 		const response = await fetch(`${backendUrl}/register`, {
 			method: 'POST',
@@ -21,5 +21,3 @@ async function registerUserAsync(name, email, password) {
 	}
 	return false;
 }
-
-export default registerUserAsync;

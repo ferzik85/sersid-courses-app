@@ -17,6 +17,10 @@ export function putUser(user) {
 	localStorage.setItem(activeUserKey, JSON.stringify(user));
 }
 
+export function isAdminUser() {
+	return getUser()?.role?.toLowerCase() === 'admin';
+}
+
 export function getUserName() {
 	return getUser()?.name;
 }

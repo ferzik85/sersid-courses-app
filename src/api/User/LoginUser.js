@@ -1,6 +1,6 @@
-import { backendUrl } from '../const/AppConsts';
+import { backendUrl } from '../../const/AppConsts';
 
-async function loginUserAsync(email, password) {
+export async function loginUserAsync(email, password) {
 	try {
 		const response = await fetch(`${backendUrl}/login`, {
 			method: 'POST',
@@ -25,5 +25,3 @@ async function loginUserAsync(email, password) {
 		ok: false,
 	};
 }
-
-export default loginUserAsync;

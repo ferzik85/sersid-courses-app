@@ -3,15 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LabeledInput from '../../common/LabeledInput/LabeledInput';
 import { validateInput, validateEmail, validatePassword } from '../../utils/ValidateInput';
-import registerUserAsync from '../../api/RegisterUser';
+import { registerUserAsync } from '../../api/User/RegisterUser';
 
 import styles from './Registration.module.css';
 
 function Registration() {
 	const navigate = useNavigate();
-	const [name, setName] = useState(null);
-	const [email, setEmail] = useState(null);
-	const [password, setPassword] = useState(null);
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [nameIsInvalid, setNameIsInvalid] = useState(false);
 	const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 	const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
@@ -53,9 +53,9 @@ function Registration() {
 			<b className={styles.regHeader}>Registration</b>
 			<div className={styles.regBody}>
 				<form onSubmit={handleSubmit} className={styles.regForm}>
-					<LabeledInput name='Name' isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
-					<LabeledInput name='Email' isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
-					<LabeledInput name='Password' isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Name' value={name} isInvalid={nameIsInvalid} onChange={handleNameChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Email' value={email} isInvalid={emailIsInvalid} onChange={handleEmailChange} inputClassName={styles.regInput} />
+					<LabeledInput name='Password' value={password} isInvalid={passwordIsInvalid} onChange={handlePasswordChange} inputClassName={styles.regInput} />
 					<Button label='REGISTER' type='submit' className={styles.regButton} />
 				</form>
 				<div className={styles.regHelp}>

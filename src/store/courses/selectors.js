@@ -14,3 +14,8 @@ export const getCourseWithAuthorName = createSelector(
 	[getCoursesWithAuthorNames, (_, courseId) => courseId],
 	(courses, courseId) => courses.find((course) => course.id === courseId) ?? null
 );
+
+export const getCourse = createSelector(
+	[getCourses, (_, courseId) => courseId],
+	(courses, courseId) => courses.find((course) => course.id === courseId) ?? null
+);

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
@@ -7,17 +7,9 @@ import styles from './DurationInput.module.css';
 import validateDuration from '../../utils/ValidateDuration';
 
 export function DurationInput({ name, duration, onChange, isInvalid, inputClassName }) {
-	const inputRef = useRef(null);
-	const clearDurationInput = () => {
-		inputRef.current.value = '';
-	};
-
 	const handleValueChange = (value) => {
 		let val = value;
-		if (!validateDuration(value)) {
-			clearDurationInput();
-			val = '';
-		}
+		if (!validateDuration(value)) val = '';
 		onChange(val);
 	};
 
@@ -28,7 +20,7 @@ export function DurationInput({ name, duration, onChange, isInvalid, inputClassN
 		<label className={styles.duration}>
 			{name}
 			<div>
-				<Input inputRef={inputRef} onChange={handleValueChange} className={assignInputClasses()} />
+				<Input value={duration} onChange={handleValueChange} className={assignInputClasses()} />
 				<Duration duration={validateDuration(duration) ? duration : 0} className={styles.durationHours} />
 			</div>
 			{isInvalid && <p className={styles.error}>{name} is required.</p>}
