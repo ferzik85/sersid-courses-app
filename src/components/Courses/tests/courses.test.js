@@ -21,9 +21,9 @@ describe('Courses tests', () => {
 	});
 
 	test('CourseForm should be shown after a click on the "Add new course" button', () => {
-		const expectedUser = { role: 'admin' };
+		const adminUser = { role: 'admin' };
 		render(
-			<TestProvider user={expectedUser} initialEntries={['/courses']}>
+			<TestProvider user={adminUser} initialEntries={['/courses']}>
 				<Routes>
 					<Route path='/courses' element={<Courses />} />
 					<Route
