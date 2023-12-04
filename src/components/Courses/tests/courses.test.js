@@ -5,14 +5,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { courses, authors, TestProvider, click } from '../../../test';
-import { isAdminUser } from '../../../localStorage/StorageAccess';
 import Courses from '../Courses';
 import CourseForm from '../../CourseForm/CourseForm';
 import { PrivateRoute } from '../../PrivateRoute';
-
-jest.mock('../../../localStorage/StorageAccess', () => ({
-	isAdminUser: jest.fn(),
-}));
 
 describe('Courses tests', () => {
 	test('Courses should display amount of CourseCards equal to number of courses', () => {
@@ -26,9 +21,9 @@ describe('Courses tests', () => {
 	});
 
 	test('CourseForm should be shown after a click on the "Add new course" button', () => {
-		isAdminUser.mockImplementation(() => true);
+		const expectedUser = { role: 'admin' };
 		render(
-			<TestProvider initialEntries={['/courses']}>
+			<TestProvider user={expectedUser} initialEntries={['/courses']}>
 				<Routes>
 					<Route path='/courses' element={<Courses />} />
 					<Route

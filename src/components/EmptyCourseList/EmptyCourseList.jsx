@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { isAdminUser } from '../../localStorage/StorageAccess';
+import { useSelector } from 'react-redux';
+import { isAdmin } from '../../store/user/selectors';
 import Button from '../../common/Button/Button';
 import styles from './EmptyCourseList.module.css';
 
 function EmptyCourseList() {
+	const isAdminUser = useSelector(isAdmin);
 	return (
 		<>
 			<div className={styles.emptyListRow}>Your List Is Empty</div>
-			{isAdminUser() ? (
+			{isAdminUser ? (
 				<>
 					<div className={styles.emptyListRow}>Please use &apos;Add New Course&apos; button to add your first course</div>
 					<div className={styles.emptyListRow}>
