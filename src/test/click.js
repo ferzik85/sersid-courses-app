@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 
 export const click = (htmlElement) => {
-	fireEvent.click(
+	fireEvent(
 		htmlElement,
 		new MouseEvent('click', {
 			bubbles: true,

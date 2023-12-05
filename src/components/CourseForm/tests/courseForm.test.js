@@ -2,8 +2,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import '@testing-library/jest-dom';
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import { TestProvider, authors, click } from '../../../test';
+import { screen, cleanup } from '@testing-library/react';
+import { testRender, authors, click } from '../../../test';
 import CourseForm from '../CourseForm';
 
 const getAuthorItems = (authorsPanel) => screen.getByText(authorsPanel).parentElement.getElementsByClassName('authorItem');
@@ -21,11 +21,7 @@ jest.mock('react-redux', () => ({
 }));
 
 beforeEach(() => {
-	render(
-		<TestProvider authors={authors}>
-			<CourseForm />
-		</TestProvider>
-	);
+	testRender(<CourseForm />, { authors });
 });
 
 afterEach(cleanup);
