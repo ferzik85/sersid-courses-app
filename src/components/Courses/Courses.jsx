@@ -5,7 +5,7 @@ import CourseCard from './components/CourseCard/CourseCard';
 import Button from '../../common/Button/Button';
 import SearchBar from './components/SearchBar/SearchBar';
 import searchCourses from '../../utils/SearchCourses';
-import { isAdminUser } from '../../localStorage/StorageAccess';
+import { isAdmin } from '../../store/user/selectors';
 import EmptyCourseList from '../EmptyCourseList/EmptyCourseList';
 import { getCoursesWithAuthorNames } from '../../store/courses/selectors';
 import styles from './Courses.module.css';
@@ -16,12 +16,13 @@ function Courses() {
 	const coursesWithAuthorNames = useSelector(getCoursesWithAuthorNames);
 	const noCourses = coursesWithAuthorNames.length === 0;
 	const filteredCourses = searchString ? searchCourses(searchString, coursesWithAuthorNames) : coursesWithAuthorNames;
+	const isAdminUser = useSelector(isAdmin);
 
 	const courseListElement = (
 		<>
 			<div className={styles.header}>
 				<SearchBar onSearchClick={handleSearchClick} />
-				{isAdminUser() ? (
+				{isAdminUser ? (
 					<Link to='add'>
 						<Button label='ADD NEW COURSE' />
 					</Link>

@@ -13,9 +13,15 @@
         "sourceType": "module"
     },
     "plugins": [
+        "testing-library",
+        "jest-dom",
         "prettier"
     ],
     "rules": {
+        "testing-library/prefer-presence-queries": [
+			"error",
+			{ "absence": false, "presence": true }
+		],
         "react/button-has-type": "off",
         "react/require-default-props": "off",
         "import/prefer-default-export": "off",
