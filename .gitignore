@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+/sersid-courses-app-server/.vs
+/sersid-courses-app-server/courses-app/bin
+/sersid-courses-app-server/courses-app/obj
 
 # testing
 /coverage
